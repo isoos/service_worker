@@ -1,0 +1,11 @@
+name: service_worker_example
+version: 0.0.1
+author: Istvan Soos <istvan.soos@gmail.com>
+description: Service Worker Example
+
+environment:
+  sdk: ">=1.19.0 <2.0.0"
+
+dependencies:
+  service_worker:
+    path: '../'

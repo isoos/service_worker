@@ -1,0 +1,9 @@
+{
+  "name": "Service Worker Example",
+  "short_name": "SW Example",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#3344BB",
+  "theme_color": "#2233AA",
+  "gcm_sender_id": "0123456789 - use your sender id here"
+}
