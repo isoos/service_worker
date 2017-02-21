@@ -29,8 +29,8 @@ Register the Service Worker from your application script, like in `example/web/m
 import 'package:service_worker/window.dart' as sw;
 
 void main() {
-  if (sw.serviceWorker != null) {
-    sw.serviceWorker.register('sw.dart.js');
+  if (sw.isSupported) {
+    sw.register('sw.dart.js');
   } else {
     print('ServiceWorkers are not supported.');
   }
@@ -43,7 +43,7 @@ Write the Service Worker in a separate script, like in `example/web/sw.dart`:
 import 'package:service_worker/service_worker.dart';
 
 void main(List<String> args) {
-  globalScope.onInstall.listen((event) {
+  onInstall.listen((event) {
     print('ServiceWorker installed.');
   });
 }

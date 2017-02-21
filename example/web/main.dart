@@ -6,18 +6,18 @@ import 'package:service_worker/window.dart' as sw;
 Future main() async {
   querySelector('#output').text = 'Your Dart app is running.';
 
-  if (sw.serviceWorker == null) {
+  if (sw.isNotSupported) {
     print('ServiceWorkers are not supported.');
     return;
   }
 
-  await sw.serviceWorker.register('sw.dart.js');
+  await sw.register('sw.dart.js');
   print('registered');
 
-  sw.ServiceWorkerRegistration registration = await sw.serviceWorker.ready;
+  sw.ServiceWorkerRegistration registration = await sw.ready;
   print('ready');
 
-  sw.serviceWorker.onMessage.listen((MessageEvent event) {
+  sw.onMessage.listen((MessageEvent event) {
     print('reply received: ${event.data}');
   });
 

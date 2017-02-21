@@ -12,6 +12,8 @@ import 'dart:html'
         MessageEvent,
         MessagePort,
         Worker;
+export 'dart:html'
+    show ErrorEvent, Event, MessageEvent;
 import 'dart:indexed_db';
 import "dart:typed_data" show ByteBuffer;
 
@@ -219,6 +221,7 @@ class ServiceWorkerContainer {
       (List list) =>
           list.map((j) => new ServiceWorkerRegistration._(j)).toList());
 
+  /// Attach an event listener.
   void addEventListener<K>(String type, listener(K event), [bool useCapture]) {
     _callMethod(_delegate, 'addEventListener',
         [type, allowInterop(listener), useCapture]);
