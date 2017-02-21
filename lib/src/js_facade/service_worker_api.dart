@@ -733,7 +733,7 @@ abstract class ServiceWorkerContainer implements EventTarget {
   /// ServiceWorkerContainer in an array.  If the method can't return
   /// ServiceWorkerRegistrations, it returns a Promise.
   external Promise<List<ServiceWorkerRegistration>> getRegistrations();
-  external void addEventListener<K>(String type, listener(K event),
+  external void addEventListener(String type, listener(dynamic event),
       [bool useCapture]);
 }
 
@@ -802,7 +802,7 @@ abstract class ServiceWorkerGlobalScope implements EventTarget {
   /// Allows the current service worker registration to progress from waiting
   /// to active state while service worker clients are using it.
   external Promise<Null> skipWaiting();
-  external void addEventListener<K>(String type, listener(K event),
+  external void addEventListener(String type, listener(dynamic event),
       [bool useCapture]);
 }
 
