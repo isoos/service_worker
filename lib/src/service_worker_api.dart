@@ -12,8 +12,7 @@ import 'dart:html'
         MessageEvent,
         MessagePort,
         Worker;
-export 'dart:html'
-    show ErrorEvent, Event, MessageEvent;
+export 'dart:html' show ErrorEvent, Event, MessageEvent;
 import 'dart:indexed_db';
 import "dart:typed_data" show ByteBuffer;
 
@@ -303,8 +302,11 @@ class Cache {
           _delegate, 'addAll', [requests.map(_wrapRequest).toList()]));
 
   /// Adds additional key/value pairs to the current Cache object.
-  Future<Null> put(Request request, Response response) => promiseToFuture(
-      _callMethod(_delegate, 'put', [request._delegate, response._delegate]));
+  Future<Null> put(dynamic /*Request|String*/ request, Response response) {
+    dynamic unwrapped = request is Request ? request._delegate : request;
+    return promiseToFuture(
+        _callMethod(_delegate, 'put', [unwrapped, response._delegate]));
+  }
 
   /// Finds the Cache entry whose key is the request, and if found, deletes the
   /// Cache entry and returns a Promise that resolves to true. If no Cache
