@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 import 'dart:html'
     show
         Blob,
@@ -20,7 +19,7 @@ import "dart:typed_data" show ByteBuffer;
 import 'package:js/js.dart';
 import 'package:js/js_util.dart' as js_util;
 
-import 'js_async_adapter.dart';
+import 'js_adapter.dart';
 import 'js_facade/service_worker_api.dart' as facade;
 
 import 'js_facade/service_worker_api.dart'
@@ -951,7 +950,7 @@ class Headers {
   bool has(String name) => _callMethod(_delegate, 'has', [name]);
 
   Iterable<String> keys() =>
-      new _Iterable(() => _callMethod(_delegate, 'keys', []));
+      iteratorToIterable(() => _callMethod(_delegate, 'keys', []));
 
   /// Create a new [Headers] instance that has the same header values, and on
   /// top of that, it appends the specified values from the [headers] Map.
@@ -976,29 +975,4 @@ dynamic _wrapRequest(dynamic /*Request|String*/ request) {
   if (request == null) return null;
   if (request is String) return request;
   return (request as Request)._delegate;
-}
-
-class _Iterator<R> implements Iterator<R> {
-  final dynamic _object;
-  R _current;
-  _Iterator(this._object);
-
-  @override
-  R get current => _current;
-
-  @override
-  bool moveNext() {
-    dynamic m = js_util.callMethod(_object, 'next', []);
-    bool hasValue = js_util.getProperty(m, 'done') == false;
-    _current = hasValue ? js_util.getProperty(m, 'value') : null;
-    return hasValue;
-  }
-}
-
-class _Iterable<R> extends IterableMixin<R> {
-  final Function _getter;
-  _Iterable(this._getter);
-
-  @override
-  Iterator<R> get iterator => new _Iterator(_getter());
 }
