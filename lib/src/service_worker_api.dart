@@ -28,6 +28,7 @@ import 'js_facade/service_worker_api.dart'
         CacheOptions,
         Notification,
         PushSubscriptionOptions,
+        RequestInit,
         ServiceWorkerRegisterOptions,
         ShowNotificationOptions;
 export 'js_facade/service_worker_api.dart'
@@ -35,6 +36,7 @@ export 'js_facade/service_worker_api.dart'
         CacheOptions,
         Notification,
         PushSubscriptionOptions,
+        RequestInit,
         ServiceWorkerRegisterOptions,
         ShowNotificationOptions;
 
@@ -133,10 +135,15 @@ class ServiceWorkerGlobalScope {
           [type, allowInterop(listener), useCapture]);
 
   /// Fetches the [request] and returns the [Response]
-  /// TODO: add RequestInit parameter
-  Future<Response> fetch(dynamic /*Request|String*/ request) => promiseToFuture(
-      _callMethod(_delegate, 'fetch', [_wrapRequest(request)]),
-      (j) => new Response._(j));
+  Future<Response> fetch(dynamic /*Request|String*/ request,
+      [RequestInit requestInit]) {
+    List args = [_wrapRequest(request)];
+    if (requestInit != null) {
+      args.add(requestInit);
+    }
+    return promiseToFuture(
+        _callMethod(_delegate, 'fetch', args), (j) => new Response._(j));
+  }
 
   /// Returns the indexedDB in the current scope.
   IdbFactory get indexedDB => _getProperty(_delegate, 'indexedDB');

@@ -68,9 +68,9 @@ void addEventListener<K>(String type, listener(K event), [bool useCapture]) =>
     _self.addEventListener(type, listener, useCapture);
 
 /// Fetches the [request] and returns the [Response]
-/// TODO: add RequestInit parameter
-Future<Response> fetch(dynamic /*Request|String*/ request) =>
-    _self.fetch(request);
+Future<Response> fetch(dynamic /*Request|String*/ request,
+        [RequestInit requestInit]) =>
+    _self.fetch(request, requestInit);
 
 /// Returns the indexedDB in the current scope.
 IdbFactory get indexedDB => _self.indexedDB;
