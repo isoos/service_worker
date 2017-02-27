@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:html'
     show
         Blob,
@@ -871,6 +872,16 @@ class Request extends Body {
   String get integrity => _getProperty(_delegate, 'integrity');
 
   Request clone() => new Request._(_callMethod(_delegate, 'clone', []));
+
+  /// Creates a new [Request] instance with the same content and headers,
+  /// appending the specified values from [headers] Map.
+  Future<Request> cloneWith({Map<String, String> headers}) async {
+    return new Request._(new facade.Request(
+      this.clone()._delegate,
+      new facade.RequestInit(
+          headers: this.headers.clone(headers: headers)._delegate),
+    ));
+  }
 }
 
 class Response extends Body {
@@ -901,6 +912,19 @@ class Response extends Body {
   dynamic get body => _getProperty(_delegate, 'body');
 
   Response clone() => new Response._(_callMethod(_delegate, 'clone', []));
+
+  /// Creates a new [Response] instance with the same content and headers,
+  /// appending the specified values from [headers] Map.
+  Future<Response> cloneWith({Map<String, String> headers}) async {
+    ByteBuffer buffer = await this.clone().arrayBuffer();
+    return new Response._(new facade.Response(
+      buffer,
+      new facade.ResponseInit(
+          status: this.status,
+          statusText: this.statusText,
+          headers: this.headers.clone(headers: headers)._delegate),
+    ));
+  }
 }
 
 class Headers {
@@ -919,7 +943,19 @@ class Headers {
 
   bool has(String name) => _callMethod(_delegate, 'has', [name]);
 
-  Iterable<String> keys() => _callMethod(_delegate, 'keys', []);
+  Iterable<String> keys() =>
+      new _Iterable(() => _callMethod(_delegate, 'keys', []));
+
+  /// Create a new [Headers] instance that has the same header values, and on
+  /// top of that, it appends the specified values from the [headers] Map.
+  Headers clone({Map<String, String> headers}) {
+    Headers h = new Headers._(new facade.Headers());
+    for (String key in this.keys()) {
+      h[key] = this[key];
+    }
+    headers?.forEach(h.append);
+    return h;
+  }
 }
 
 // Utility method to mask the typed JS facade as JSObject
@@ -933,4 +969,29 @@ dynamic _wrapRequest(dynamic /*Request|String*/ request) {
   if (request == null) return null;
   if (request is String) return request;
   return (request as Request)._delegate;
+}
+
+class _Iterator<R> implements Iterator<R> {
+  final dynamic _object;
+  R _current;
+  _Iterator(this._object);
+
+  @override
+  R get current => _current;
+
+  @override
+  bool moveNext() {
+    dynamic m = js_util.callMethod(_object, 'next', []);
+    bool hasValue = js_util.getProperty(m, 'done') == false;
+    _current = hasValue ? js_util.getProperty(m, 'value') : null;
+    return hasValue;
+  }
+}
+
+class _Iterable<R> extends IterableMixin<R> {
+  final Function _getter;
+  _Iterable(this._getter);
+
+  @override
+  Iterator<R> get iterator => new _Iterator(_getter());
 }
