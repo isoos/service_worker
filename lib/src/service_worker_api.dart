@@ -334,10 +334,17 @@ class Cache {
           _callMethod(_delegate, 'delete', [_wrapRequest(request), options]));
 
   /// Returns a Promise that resolves to an array of Cache keys.
-  Future<List<Request>> keys([Request request, CacheOptions options]) =>
-      promiseToFuture(
-          _callMethod(_delegate, 'keys', [_wrapRequest(request), options]),
-          (List list) => list?.map((item) => new Request._(item))?.toList());
+  Future<List<Request>> keys([Request request, CacheOptions options]) {
+    List params = [];
+    if (request != null) {
+      params.add(_wrapRequest(request));
+      if (options != null) {
+        params.add(options);
+      }
+    }
+    return promiseToFuture(_callMethod(_delegate, 'keys', params),
+        (List list) => list?.map((item) => new Request._(item))?.toList());
+  }
 }
 
 /// Represents a container for a list of Client objects; the main way to access
