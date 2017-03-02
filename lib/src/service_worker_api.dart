@@ -43,8 +43,13 @@ export 'js_facade/service_worker_api.dart'
 /// a service worker.
 class ServiceWorkerGlobalScope {
   /// API entry point for ServiceWorkers.
-  static final ServiceWorkerGlobalScope self =
+  static final ServiceWorkerGlobalScope globalScope =
       new ServiceWorkerGlobalScope._(facade.globalScopeSelf);
+
+  /// As ServiceWorkerGlobalScope has an instance-level self defined, this
+  /// static value will be removed in the next release.
+  @deprecated
+  static final ServiceWorkerGlobalScope self = globalScope;
 
   facade.ServiceWorkerGlobalScope _delegate;
   CacheStorage _caches;
@@ -57,6 +62,7 @@ class ServiceWorkerGlobalScope {
   Stream<NotificationEvent> _onNotificationClick;
   Stream<PushEvent> _onPush;
   Stream<PushEvent> _onPushSubscriptionChange;
+  WorkerLocation _location;
 
   ServiceWorkerGlobalScope._(this._delegate);
 
@@ -146,6 +152,10 @@ class ServiceWorkerGlobalScope {
 
   /// Returns the indexedDB in the current scope.
   IdbFactory get indexedDB => _getProperty(_delegate, 'indexedDB');
+
+  // Returns the location object of the worker.
+  WorkerLocation get location =>
+      _location ??= new WorkerLocation(_getProperty(_delegate, 'location'));
 }
 
 /// Provides an object representing the service worker as an overall unit in the
@@ -962,6 +972,24 @@ class Headers {
     headers?.forEach(h.append);
     return h;
   }
+}
+
+class WorkerLocation {
+  dynamic _delegate;
+  WorkerLocation(this._delegate);
+
+  String get href => _getProperty(_delegate, 'href');
+  String get protocol => _getProperty(_delegate, 'protocol');
+  String get host => _getProperty(_delegate, 'host');
+  String get hostname => _getProperty(_delegate, 'hostname');
+  String get origin => _getProperty(_delegate, 'origin');
+  String get port => _getProperty(_delegate, 'port');
+  String get pathname => _getProperty(_delegate, 'pathname');
+  String get search => _getProperty(_delegate, 'search');
+  String get hash => _getProperty(_delegate, 'hash');
+
+  @override
+  String toString() => href;
 }
 
 // Utility method to mask the typed JS facade as JSObject

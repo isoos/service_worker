@@ -7,7 +7,7 @@ import 'dart:indexed_db';
 import 'src/service_worker_api.dart';
 export 'src/service_worker_api.dart' hide ServiceWorkerContainer;
 
-ServiceWorkerGlobalScope _self = ServiceWorkerGlobalScope.self;
+ServiceWorkerGlobalScope _self = ServiceWorkerGlobalScope.globalScope;
 
 /// Contains the CacheStorage object associated with the service worker.
 CacheStorage get caches => _self.caches;
@@ -74,3 +74,6 @@ Future<Response> fetch(dynamic /*Request|String*/ request,
 
 /// Returns the indexedDB in the current scope.
 IdbFactory get indexedDB => _self.indexedDB;
+
+// Returns the location object of the worker.
+WorkerLocation get location => _self.location;
