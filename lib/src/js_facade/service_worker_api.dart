@@ -4,7 +4,6 @@ library service_worker_api;
 import "package:js/js.dart";
 import "dart:html"
     show
-        Worker,
         Event,
         Blob,
         MessagePort,
@@ -212,7 +211,7 @@ abstract class ServiceWorkerClients {
 /// etc.) can be associated with the same ServiceWorker object.
 @anonymous
 @JS()
-abstract class ServiceWorker implements Worker {
+abstract class ServiceWorker {
   /// Returns the ServiceWorker serialized script URL defined as part of
   /// ServiceWorkerRegistration. The URL must be on the same origin as the
   /// document that registers the ServiceWorker.

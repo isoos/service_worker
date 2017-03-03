@@ -1,3 +1,9 @@
+## 0.0.7
+
+- removed Worker interface from JS facade, solves Dartium issue
+
+## 0.0.1 - 0.0.6
+
 ### 0.0.6
 
 - fixed Cache.keys()
