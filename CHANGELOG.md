@@ -1,3 +1,10 @@
+# Changelog
+
+## 0.0.8
+
+- ServiceWorkerClient.postMessage() to use List as transfer objects parameter. 
+- ServiceWorker.postMessage(): any Transferable object can be set, not only MessagePorts.
+
 ## 0.0.7
 
 - removed Worker interface from JS facade, solves Dartium issue

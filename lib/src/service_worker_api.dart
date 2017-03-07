@@ -390,7 +390,7 @@ class ServiceWorkerClient {
 
   /// Allows a service worker client to send a message to a ServiceWorker.
   /// to a port.
-  void postMessage(dynamic message, [dynamic transfer]) {
+  void postMessage(dynamic message, [List<dynamic> transfer]) {
     List args = [message];
     if (transfer != null) args.add(transfer);
     _callMethod(_delegate, 'postMessage', args);
@@ -741,7 +741,7 @@ class ServiceWorker implements Worker {
       _onMessage ??= callbackToStream(_delegate, 'onmessage', (j) => j);
 
   @override
-  void postMessage(dynamic message, [List<MessagePort> transfer]) {
+  void postMessage(dynamic message, [List<dynamic> transfer]) {
     List args = [message];
     if (transfer != null) args.add(transfer);
     _callMethod(_delegate, 'postMessage', args);
