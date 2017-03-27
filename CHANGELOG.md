@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.9
+
+- `PushManager.hasPermission()` is a deprecated API and it doesn't work in Chrome
+  anymore, clients should use `permissionState()` instead.
+
 ## 0.0.8
 
 - ServiceWorkerClient.postMessage() to use List as transfer objects parameter. 

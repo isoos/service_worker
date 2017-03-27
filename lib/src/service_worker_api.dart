@@ -523,8 +523,14 @@ class PushManager {
 
   /// Returns a promise that resolves to the PushPermissionStatus of the
   /// requesting webapp, which will be one of granted, denied, or default.
+  @Deprecated('User permissionState() instead.')
   Future<String> hasPermission() =>
       promiseToFuture(_callMethod(_delegate, 'hasPermission', []));
+
+  /// Returns a promise that resolves to the PushPermissionStatus of the
+  /// requesting webapp, which will be one of granted, denied, or prompt.
+  Future<String> permissionState([PushSubscriptionOptions options]) =>
+      promiseToFuture(_callMethod(_delegate, 'permissionState', [options]));
 }
 
 /// The PushSubscription interface provides a subcription's URL endpoint and
