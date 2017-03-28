@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.10
+
+- export ShowNotificationAction
+
 ## 0.0.9
 
 - `PushManager.hasPermission()` is a deprecated API and it doesn't work in Chrome

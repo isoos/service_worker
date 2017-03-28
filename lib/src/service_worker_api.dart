@@ -37,6 +37,7 @@ export 'js_facade/service_worker_api.dart'
         PushSubscriptionOptions,
         RequestInit,
         ServiceWorkerRegisterOptions,
+        ShowNotificationAction,
         ShowNotificationOptions;
 
 /// A ServiceWorkerGlobalScope object represents the global execution context of
