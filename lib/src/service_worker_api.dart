@@ -429,6 +429,12 @@ class ServiceWorkerRegistration implements EventTarget {
   Stream _onUpdateFound;
   ServiceWorkerRegistration._(this._delegate);
 
+  /// The raw JS object reference.
+  ///
+  /// Exposed for simpler third-party integration that takes the JS object
+  /// reference of the registration and handles the rest (e.g. firebase-dart).
+  dynamic get jsObject => _delegate;
+
   /// Returns a unique identifier for a service worker registration.
   /// This must be on the same origin as the document that registers
   /// the ServiceWorker.
