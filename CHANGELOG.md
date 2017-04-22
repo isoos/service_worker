@@ -3,6 +3,7 @@
 ## 0.0.11
 
 - expose `ServiceWorkerRegistration.jsObject`
+- fix a few typing bug
 
 ## 0.0.10
 

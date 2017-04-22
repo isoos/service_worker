@@ -508,7 +508,7 @@ class ShowNotificationOptions {
   /// An array of actions to display in the notification. Appropriate responses
   /// are built using event.action within the notificationclick event.
   external List<ShowNotificationAction> get actions;
-  external set scope(String v);
+  external set actions(List<ShowNotificationAction> v);
 
   /// The URL of an image to represent the notification when there is not enough
   /// space to display the notification itself such as, for example, the Android
@@ -568,8 +568,8 @@ class ShowNotificationOptions {
 
   /// Arbitrary data that you want associated with the notification.
   /// This can be of any data type.
-  external String get data;
-  external set data(String v);
+  external dynamic get data;
+  external set data(dynamic v);
 
   external factory ShowNotificationOptions({
     List<ShowNotificationAction> actions,
