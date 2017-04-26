@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.12
+
+- expose keys in `PushSubscription`
+
 ## 0.0.11
 
 - expose `ServiceWorkerRegistration.jsObject`

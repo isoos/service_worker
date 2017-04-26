@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert' show JSON;
 import 'dart:html'
     show
         Blob,
@@ -549,10 +550,34 @@ class PushSubscription {
   /// The endpoint associated with the push subscription.
   dynamic get endpoint => _getProperty(_delegate, 'endpoint');
 
+  /// Returns a ByteBuffer representing a client public key, which can then be
+  /// sent to a server and used in encrypting push message data.
+  ///
+  /// See [PushSubscriptionKeys] for key names.
+  ByteBuffer getKey(String name) => _callMethod(_delegate, 'getKey', [name]);
+
+  /// Similar to [getKey], it returns the client public keys, encoded as String.
+  ///
+  /// Returns an empty map if no keys are present.
+  Map<String, String> getKeysAsString() {
+    Map map = JSON.decode(facade.jsonStringify(_delegate));
+    var keys = map['keys'];
+    if (keys is Map) {
+      return keys as Map<String, String>;
+    }
+    return {};
+  }
+
   /// Resolves to a Boolean when the current subscription is successfully
   /// unsubscribed.
   Future<bool> unsubscribe() =>
       promiseToFuture(_callMethod(_delegate, 'unsubscribe', []));
+}
+
+/// Key values that may be stored in a PushSubscription.
+abstract class PushSubscriptionKeys {
+  static const String auth = 'auth';
+  static const String p256dh = 'p256dh';
 }
 
 /// Extends the lifetime of the install and activate events dispatched on the

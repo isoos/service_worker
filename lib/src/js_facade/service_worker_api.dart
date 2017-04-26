@@ -810,3 +810,6 @@ external ServiceWorkerGlobalScope get globalScopeSelf;
 
 @JS('window.navigator.serviceWorker')
 external ServiceWorkerContainer get navigatorContainer;
+
+@JS('JSON.stringify')
+external String jsonStringify(Object obj);

@@ -1,5 +1,5 @@
 name: service_worker
-version: 0.0.11
+version: 0.0.12
 author: Istvan Soos <istvan.soos@gmail.com>
 description: Service Worker API
 
@@ -11,4 +11,3 @@ environment:
 dependencies:
   func: ^0.1.1
   js: ^0.6.1
-
