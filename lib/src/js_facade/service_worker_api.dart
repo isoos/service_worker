@@ -500,6 +500,9 @@ abstract class Notification {
     String title,
     List<int> vibrate,
   });
+
+  /// Close a previously displayed notification.
+  external void close();
 }
 
 @anonymous

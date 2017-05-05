@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.13
+
+- expose `Notification.close()`
+
 ## 0.0.12
 
 - expose keys in `PushSubscription`
