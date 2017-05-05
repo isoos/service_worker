@@ -3,6 +3,7 @@
 ## 0.0.13
 
 - expose `Notification.close()`
+- expose `ServiceWorkerClientsMatchOptions`
 
 ## 0.0.12
 

@@ -29,6 +29,7 @@ import 'js_facade/service_worker_api.dart'
         Notification,
         PushSubscriptionOptions,
         RequestInit,
+        ServiceWorkerClientsMatchOptions,
         ServiceWorkerRegisterOptions,
         ShowNotificationOptions;
 export 'js_facade/service_worker_api.dart'
@@ -37,6 +38,7 @@ export 'js_facade/service_worker_api.dart'
         Notification,
         PushSubscriptionOptions,
         RequestInit,
+        ServiceWorkerClientsMatchOptions,
         ServiceWorkerRegisterOptions,
         ShowNotificationAction,
         ShowNotificationOptions;
@@ -366,7 +368,7 @@ class ServiceWorkerClients {
   /// are not included, the method returns only the service worker clients
   /// controlled by the service worker.
   Future<List<ServiceWorkerClient>> matchAll(
-          [facade.ServiceWorkerClientsMatchOptions options]) =>
+          [ServiceWorkerClientsMatchOptions options]) =>
       promiseToFuture(
           _callMethod(_delegate, 'matchAll', [options]),
           (List list) =>
