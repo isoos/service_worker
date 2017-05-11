@@ -184,11 +184,8 @@ class ServiceWorkerContainer {
   /// returned by ServiceWorkerRegistration.active). This property returns null
   /// if the request is a force refresh (Shift + refresh) or if there is no
   /// active worker.
-  ServiceWorker get controller {
-    var j = _getProperty(_delegate, 'controller');
-    if (j == null) return null;
-    return new ServiceWorker._(j);
-  }
+  ServiceWorker get controller =>
+      ServiceWorker._fromDelegate(_getProperty(_delegate, 'controller'));
 
   /// Defines whether a service worker is ready to control a page or not.
   /// It returns a Promise that will never reject, which resolves to a
@@ -446,12 +443,12 @@ class ServiceWorkerRegistration implements EventTarget {
   /// Returns a service worker whose state is installing. This is initially
   /// set to null.
   ServiceWorker get installing =>
-      new ServiceWorker._(_getProperty(_delegate, 'installing'));
+      ServiceWorker._fromDelegate(_getProperty(_delegate, 'installing'));
 
   /// Returns a service worker whose state is installed. This is initially
   /// set to null.
   ServiceWorker get waiting =>
-      new ServiceWorker._(_getProperty(_delegate, 'waiting'));
+      ServiceWorker._fromDelegate(_getProperty(_delegate, 'waiting'));
 
   /// Returns a service worker whose state is either activating or activated.
   /// This is initially set to null. An active worker will control a
@@ -459,7 +456,7 @@ class ServiceWorkerRegistration implements EventTarget {
   /// registration (the scope option set when ServiceWorkerContainer.register
   /// is first called).
   ServiceWorker get active =>
-      new ServiceWorker._(_getProperty(_delegate, 'active'));
+      ServiceWorker._fromDelegate(_getProperty(_delegate, 'active'));
 
   /// Returns an interface to for managing push subscriptions, including
   /// subscribing, getting an active subscription, and accessing push
@@ -725,7 +722,7 @@ class InstallEvent extends ExtendableEvent {
 
   /// Returns the ServiceWorker that is currently actively controlling the page.
   ServiceWorker get activeWorker => _activeWorker ??=
-      new ServiceWorker._(_getProperty(_delegate, 'activeWorker'));
+      ServiceWorker._fromDelegate(_getProperty(_delegate, 'activeWorker'));
 }
 
 /// Represents a service worker. Multiple browsing contexts (e.g. pages, workers,
@@ -736,6 +733,11 @@ class ServiceWorker implements Worker {
   Stream<ErrorEvent> _onError;
   Stream<MessageEvent> _onMessage;
   ServiceWorker._(this._delegate);
+
+  static ServiceWorker _fromDelegate(delegate) {
+    if (delegate == null) return null;
+    return new ServiceWorker._(delegate);
+  }
 
   /// Returns the ServiceWorker serialized script URL defined as part of
   /// ServiceWorkerRegistration. The URL must be on the same origin as the
