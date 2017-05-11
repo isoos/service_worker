@@ -3,6 +3,7 @@
 ## 0.0.14
 
 - Don't return `ServiceWorker` instances when the underlying JS object is null.
+- Mask types from JS facade, to prevent type check errors in Dartium.
 
 ## 0.0.13
 

@@ -55,7 +55,8 @@ class ServiceWorkerGlobalScope {
   @deprecated
   static final ServiceWorkerGlobalScope self = globalScope;
 
-  facade.ServiceWorkerGlobalScope _delegate;
+  // Masked type: facade.ServiceWorkerGlobalScope
+  final _delegate;
   CacheStorage _caches;
   ServiceWorkerClients _clients;
   ServiceWorkerRegistration _registration;
@@ -176,7 +177,8 @@ class ServiceWorkerContainer {
   Stream<Event> _onControllerChange;
   Stream<ErrorEvent> _onError;
   Stream<MessageEvent> _onMessage;
-  facade.ServiceWorkerContainer _delegate;
+  // Masked type: facade.ServiceWorkerContainer
+  final _delegate;
 
   ServiceWorkerContainer._(this._delegate);
 
@@ -249,14 +251,15 @@ class ServiceWorkerContainer {
 /// all the named caches that a ServiceWorker can access and maintains a mapping
 /// of string names to corresponding Cache objects.
 class CacheStorage {
-  facade.CacheStorage _delegate;
+  // Masked type: facade.CacheStorage
+  final _delegate;
   CacheStorage._(this._delegate);
 
   /// Checks if a given Request is a key in any of the Cache objects that the
   /// CacheStorage object tracks and returns a Promise that resolves
   /// to that match.
   Future<Response> match(dynamic /*Request|String*/ request,
-          [facade.CacheOptions options]) =>
+          [CacheOptions options]) =>
       promiseToFuture(
           _callMethod(_delegate, 'match', [_wrapRequest(request), options]),
           (j) => new Response._(j));
@@ -289,7 +292,8 @@ class CacheStorage {
 /// Represents the storage for Request / Response object pairs that are cached as
 /// part of the ServiceWorker life cycle.
 class Cache {
-  facade.Cache _delegate;
+  // Masked type: facade.Cache
+  final _delegate;
   Cache._(this._delegate);
 
   /// Returns a Promise that resolves to the response associated with the first
@@ -351,7 +355,8 @@ class Cache {
 /// Represents a container for a list of Client objects; the main way to access
 /// the active service worker clients at the current origin.
 class ServiceWorkerClients {
-  facade.ServiceWorkerClients _delegate;
+  // Masked type: facade.ServiceWorkerClients
+  final _delegate;
   ServiceWorkerClients._(this._delegate);
 
   /// Gets a service worker client matching a given id and returns it in a Promise.
@@ -386,7 +391,8 @@ class ServiceWorkerClients {
 /// either a document in a browser context or a SharedWorker, which is controlled
 /// by an active worker.
 class ServiceWorkerClient {
-  facade.ServiceWorkerClient _delegate;
+  // Masked type: facade.ServiceWorkerClient
+  final _delegate;
   ServiceWorkerClient._(this._delegate);
 
   /// Allows a service worker client to send a message to a ServiceWorker.
@@ -409,7 +415,8 @@ class ServiceWorkerClient {
 }
 
 class WindowClient extends ServiceWorkerClient {
-  WindowClient._(facade.WindowClient delegate) : super._(delegate);
+  // Masked type: facade.WindowClient
+  WindowClient._(delegate) : super._(delegate);
 
   /// Gives user input focus to the current client.
   Future<Null> focus() => promiseToFuture(_callMethod(_delegate, 'focus', []));
@@ -424,7 +431,8 @@ class WindowClient extends ServiceWorkerClient {
 
 /// Represents a service worker registration.
 class ServiceWorkerRegistration implements EventTarget {
-  facade.ServiceWorkerRegistration _delegate;
+  // Masked type: facade.ServiceWorkerRegistration
+  final _delegate;
   PushManager _pushManager;
   Stream _onUpdateFound;
   ServiceWorkerRegistration._(this._delegate);
@@ -513,7 +521,8 @@ class ServiceWorkerRegistration implements EventTarget {
 /// This interface has replaced functionality offered by the obsolete
 /// PushRegistrationManager.
 class PushManager {
-  facade.PushManager _delegate;
+  // Masked type: facade.PushManager
+  final _delegate;
   PushManager._(this._delegate);
 
   /// Returns a promise that resolves to a PushSubscription with details of a
@@ -543,7 +552,8 @@ class PushManager {
 /// The PushSubscription interface provides a subcription's URL endpoint and
 /// subscription ID.
 class PushSubscription {
-  facade.PushSubscription _delegate;
+  // Masked type: facade.PushSubscription
+  final _delegate;
   PushSubscription._(this._delegate);
 
   /// The endpoint associated with the push subscription.
@@ -585,7 +595,8 @@ abstract class PushSubscriptionKeys {
 /// the ServiceWorker until it upgrades database schemas, deletes outdated cache
 /// entries, etc.
 class ExtendableEvent implements Event {
-  facade.ExtendableEvent _delegate;
+  // Masked type: facade.ExtendableEvent
+  final _delegate;
   ExtendableEvent._(this._delegate);
 
   /// Extends the lifetime of the event.
@@ -643,7 +654,8 @@ class ExtendableEvent implements Event {
 /// method, which allows us to provide an arbitrary response back to the
 /// controlled page.
 class FetchEvent implements Event {
-  facade.FetchEvent _delegate;
+  // Masked type: facade.FetchEvent
+  final _delegate;
   Request _request;
   ServiceWorkerClient _client;
   FetchEvent._(this._delegate);
@@ -718,7 +730,8 @@ class FetchEvent implements Event {
 /// during installation.
 class InstallEvent extends ExtendableEvent {
   ServiceWorker _activeWorker;
-  InstallEvent._(facade.InstallEvent delegate) : super._(delegate);
+  // Masked type: facade.InstallEvent
+  InstallEvent._(delegate) : super._(delegate);
 
   /// Returns the ServiceWorker that is currently actively controlling the page.
   ServiceWorker get activeWorker => _activeWorker ??=
@@ -728,7 +741,8 @@ class InstallEvent extends ExtendableEvent {
 /// Represents a service worker. Multiple browsing contexts (e.g. pages, workers,
 /// etc.) can be associated with the same ServiceWorker object.
 class ServiceWorker implements Worker {
-  facade.ServiceWorker _delegate;
+  // Masked type: facade.ServiceWorker
+  final _delegate;
   Stream<Event> _onStateChange;
   Stream<ErrorEvent> _onError;
   Stream<MessageEvent> _onMessage;
@@ -806,8 +820,8 @@ class ServiceWorker implements Worker {
 /// the ServiceWorkerGlobalScope from another context)
 /// — extends the lifetime of such events.
 class ExtendableMessageEvent extends ExtendableEvent {
-  ExtendableMessageEvent._(facade.ExtendableMessageEvent delegate)
-      : super._(delegate);
+  // Masked type: facade.ExtendableMessageEvent
+  ExtendableMessageEvent._(delegate) : super._(delegate);
 
   /// Returns the event's data. It can be any data type.
   dynamic get data => _getProperty(_delegate, 'data');
@@ -831,7 +845,8 @@ class ExtendableMessageEvent extends ExtendableEvent {
 /// a notification click event that is dispatched on
 /// the ServiceWorkerGlobalScope of a ServiceWorker.
 class NotificationEvent extends ExtendableEvent {
-  NotificationEvent._(facade.NotificationEvent delegate) : super._(delegate);
+  // Masked type: facade.NotificationEvent
+  NotificationEvent._(delegate) : super._(delegate);
 
   /// Returns a Notification object representing
   /// the notification that was clicked to fire the event.
@@ -849,7 +864,8 @@ class NotificationEvent extends ExtendableEvent {
 /// This event is sent to the global scope of a ServiceWorker.
 /// It contains the information sent from an application server to a PushSubscription.
 class PushEvent extends ExtendableEvent {
-  PushEvent._(facade.PushEvent delegate) : super._(delegate);
+  // Masked type: facade.PushEvent
+  PushEvent._(delegate) : super._(delegate);
 
   /// Returns a reference to a PushMessageData object containing
   /// data sent to the PushSubscription.
@@ -860,7 +876,8 @@ class PushEvent extends ExtendableEvent {
 /// The PushMessageData interface of the Push API provides
 /// methods which let you retrieve the push data sent by a server in various formats.
 class PushMessageData {
-  facade.PushMessageData _delegate;
+  // Masked type: facade.PushMessageData
+  final _delegate;
   PushMessageData._(this._delegate);
 
   /// Extracts the data as a ByteBuffer object.
@@ -877,7 +894,8 @@ class PushMessageData {
 }
 
 class Body {
-  facade.Body _delegate;
+  // Masked type: facade.Body
+  final _delegate;
   Body._(this._delegate);
 
   /// indicates whether the body has been read yet
@@ -903,7 +921,8 @@ class Body {
 class Request extends Body {
   Headers _headers;
 
-  Request._(facade.Request delegate) : super._(delegate);
+  // Masked type: facade.Request
+  Request._(delegate) : super._(delegate);
 
   String get method => _getProperty(_delegate, 'method');
   String get url => _getProperty(_delegate, 'url');
@@ -951,7 +970,8 @@ class Request extends Body {
 
 class Response extends Body {
   Headers _headers;
-  Response._(facade.Response delegate) : super._(delegate);
+  // Masked type: facade.Response
+  Response._(delegate) : super._(delegate);
 
   factory Response.redirect(String url, [int status]) =>
       new Response._(facade.Response.redirect(url, status));
@@ -993,7 +1013,8 @@ class Response extends Body {
 }
 
 class Headers {
-  facade.Headers _delegate;
+  // Masked type: facade.Headers
+  final _delegate;
   Headers._(this._delegate);
 
   void append(String name, String value) =>

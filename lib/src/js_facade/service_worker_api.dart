@@ -808,11 +808,13 @@ abstract class ServiceWorkerGlobalScope implements EventTarget {
       [bool useCapture]);
 }
 
+// Masked type: ServiceWorkerGlobalScope
 @JS('self')
-external ServiceWorkerGlobalScope get globalScopeSelf;
+external dynamic get globalScopeSelf;
 
+// Masked type: ServiceWorkerContainer
 @JS('window.navigator.serviceWorker')
-external ServiceWorkerContainer get navigatorContainer;
+external dynamic get navigatorContainer;
 
 @JS('JSON.stringify')
 external String jsonStringify(Object obj);
