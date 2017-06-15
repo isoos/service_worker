@@ -610,7 +610,7 @@ class ExtendableEvent implements Event {
   EventTarget get target => _getProperty(_delegate, 'target');
 
   @override
-  int get timeStamp => _getProperty(_delegate, 'timeStamp');
+  double get timeStamp => _getProperty(_delegate, 'timeStamp');
 
   @override
   String get type => _getProperty(_delegate, 'type');
@@ -625,10 +625,16 @@ class ExtendableEvent implements Event {
   EventTarget get currentTarget => _getProperty(_delegate, 'currentTarget');
 
   @override
+  List<EventTarget> deepPath() => _callMethod(_delegate, 'deepPath', []);
+
+  @override
   bool get defaultPrevented => _getProperty(_delegate, 'defaultPrevented');
 
   @override
   int get eventPhase => _getProperty(_delegate, 'eventPhase');
+
+  @override
+  bool get isTrusted => _getProperty(_delegate, 'isTrusted');
 
   @override
   Element get matchingTarget => _getProperty(_delegate, 'matchingTarget');
@@ -638,6 +644,9 @@ class ExtendableEvent implements Event {
 
   @override
   void preventDefault() => _callMethod(_delegate, 'preventDefault', []);
+
+  @override
+  bool get scoped => _getProperty(_delegate, 'scoped');
 
   @override
   void stopImmediatePropagation() =>
@@ -686,7 +695,7 @@ class FetchEvent implements Event {
   EventTarget get target => _getProperty(_delegate, 'target');
 
   @override
-  int get timeStamp => _getProperty(_delegate, 'timeStamp');
+  double get timeStamp => _getProperty(_delegate, 'timeStamp');
 
   @override
   String get type => _getProperty(_delegate, 'type');
@@ -701,10 +710,16 @@ class FetchEvent implements Event {
   EventTarget get currentTarget => _getProperty(_delegate, 'currentTarget');
 
   @override
+  List<EventTarget> deepPath() => _callMethod(_delegate, 'deepPath', []);
+
+  @override
   bool get defaultPrevented => _getProperty(_delegate, 'defaultPrevented');
 
   @override
   int get eventPhase => _getProperty(_delegate, 'eventPhase');
+
+  @override
+  bool get isTrusted => _getProperty(_delegate, 'isTrusted');
 
   @override
   Element get matchingTarget => _getProperty(_delegate, 'matchingTarget');
@@ -714,6 +729,9 @@ class FetchEvent implements Event {
 
   @override
   void preventDefault() => _callMethod(_delegate, 'preventDefault', []);
+
+  @override
+  bool get scoped => _getProperty(_delegate, 'scoped');
 
   @override
   void stopImmediatePropagation() =>

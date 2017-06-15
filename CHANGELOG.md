@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.15
+
+- Implement new methods for classes that implement `Event`.
+
 ## 0.0.14
 
 - Don't return `ServiceWorker` instances when the underlying JS object is null.
