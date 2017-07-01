@@ -8,8 +8,7 @@ import "dart:html"
         Blob,
         MessagePort,
         MessageEvent,
-        ErrorEvent,
-        EventTarget;
+        ErrorEvent;
 import "package:func/func.dart";
 import "dart:typed_data" show ByteBuffer, Uint8List;
 
@@ -312,7 +311,7 @@ abstract class PushManager {
 /// entries, etc.
 @anonymous
 @JS()
-abstract class ExtendableEvent implements Event {
+abstract class ExtendableEvent {
   /// Extends the lifetime of the event.
   /// It is intended to be called in the install EventHandler for the
   /// installing worker and on the active EventHandler for the active worker.
@@ -327,7 +326,7 @@ abstract class ExtendableEvent implements Event {
 /// controlled page.
 @anonymous
 @JS()
-abstract class FetchEvent implements Event {
+abstract class FetchEvent {
   /// Returns a Boolean that is true if the event was dispatched with the
   /// user's intention for the page to reload, and false otherwise. Typically,
   /// pressing the refresh button in a browser is a reload, while clicking a
@@ -358,7 +357,7 @@ abstract class FetchEvent implements Event {
 /// — extends the lifetime of such events.
 @anonymous
 @JS()
-abstract class ExtendableMessageEvent implements ExtendableEvent {
+abstract class ExtendableMessageEvent {
   /// Returns the event's data. It can be any data type.
   external dynamic get data;
   external set data(dynamic v);
@@ -625,7 +624,7 @@ abstract class PushEvent implements ExtendableEvent {
 /// Represents a service worker registration.
 @anonymous
 @JS()
-abstract class ServiceWorkerRegistration implements EventTarget {
+abstract class ServiceWorkerRegistration {
   /// Returns a unique identifier for a service worker registration.
   /// This must be on the same origin as the document that registers
   /// the ServiceWorker.
@@ -685,7 +684,7 @@ abstract class ServiceWorkerRegisterOptions {
 /// and their registrations.
 @anonymous
 @JS()
-abstract class ServiceWorkerContainer implements EventTarget {
+abstract class ServiceWorkerContainer {
   /// Returns a ServiceWorker object if its state is activated (the same object
   /// returned by ServiceWorkerRegistration.active). This property returns null
   /// if the request is a force refresh (Shift + refresh) or if there is no
@@ -741,7 +740,7 @@ abstract class ServiceWorkerContainer implements EventTarget {
 
 @anonymous
 @JS()
-abstract class ServiceWorkerGlobalScope implements EventTarget {
+abstract class ServiceWorkerGlobalScope {
   /// Contains the CacheStorage object associated with the service worker.
   external CacheStorage get caches;
   external set caches(CacheStorage v);

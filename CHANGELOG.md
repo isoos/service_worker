@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.16
+
+- Remove 'implements' from JS facade methods, as it seems to break with dart2js.
+
 ## 0.0.15
 
 - Implement new methods for classes that implement `Event`.
