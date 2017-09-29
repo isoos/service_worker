@@ -6,7 +6,7 @@ description: Service Worker API
 homepage: https://github.com/isoos/service_worker
 
 environment:
-  sdk: ">=1.19.0 <2.0.0"
+  sdk: ">=1.21.0 <2.0.0"
 
 dependencies:
   func: ">=0.1.1 <1.1.0"
