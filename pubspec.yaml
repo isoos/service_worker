@@ -9,5 +9,5 @@ environment:
   sdk: ">=1.19.0 <2.0.0"
 
 dependencies:
-  func: ^0.1.1
+  func: ">=0.1.1 <1.1.0"
   js: ^0.6.1
