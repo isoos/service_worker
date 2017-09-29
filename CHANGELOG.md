@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0
+
+- Upgraded dependencies.
+
 ## 0.0.16
 
 - Remove 'implements' from JS facade methods, as it seems to break with dart2js.
