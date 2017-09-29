@@ -13,7 +13,6 @@ import 'dart:html'
         MessageEvent,
         MessagePort,
         Worker;
-export 'dart:html' show ErrorEvent, Event, MessageEvent;
 import 'dart:indexed_db';
 import "dart:typed_data" show ByteBuffer;
 
@@ -32,6 +31,9 @@ import 'js_facade/service_worker_api.dart'
         ServiceWorkerClientsMatchOptions,
         ServiceWorkerRegisterOptions,
         ShowNotificationOptions;
+
+export 'dart:html' show ErrorEvent, Event, MessageEvent;
+
 export 'js_facade/service_worker_api.dart'
     show
         CacheOptions,
@@ -979,7 +981,7 @@ class Request extends Body {
   /// appending the specified values from [headers] Map.
   Future<Request> cloneWith({Map<String, String> headers}) async {
     return new Request._(new facade.Request(
-      this.clone()._delegate,
+      clone()._delegate,
       new facade.RequestInit(
           headers: this.headers.clone(headers: headers)._delegate),
     ));
@@ -1019,12 +1021,12 @@ class Response extends Body {
   /// Creates a new [Response] instance with the same content and headers,
   /// appending the specified values from [headers] Map.
   Future<Response> cloneWith({Map<String, String> headers}) async {
-    ByteBuffer buffer = await this.clone().arrayBuffer();
+    ByteBuffer buffer = await clone().arrayBuffer();
     return new Response._(new facade.Response(
       buffer,
       new facade.ResponseInit(
-          status: this.status,
-          statusText: this.statusText,
+          status: status,
+          statusText: statusText,
           headers: this.headers.clone(headers: headers)._delegate),
     ));
   }
@@ -1054,7 +1056,7 @@ class Headers {
   /// top of that, it appends the specified values from the [headers] Map.
   Headers clone({Map<String, String> headers}) {
     Headers h = new Headers._(new facade.Headers());
-    for (String key in this.keys()) {
+    for (String key in keys()) {
       h[key] = this[key];
     }
     headers?.forEach(h.append);

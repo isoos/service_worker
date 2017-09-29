@@ -1,9 +1,10 @@
 @JS()
 library isomorphic_fetch;
 
-import "package:js/js.dart";
-import "dart:typed_data" show ByteBuffer;
 import "dart:html" show Blob, FormData;
+import "dart:typed_data" show ByteBuffer;
+
+import "package:js/js.dart";
 
 import 'promise.dart';
 

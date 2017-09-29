@@ -1,7 +1,6 @@
 @JS()
 library service_worker_api;
 
-import "package:js/js.dart";
 import "dart:html"
     show
         Event,
@@ -9,15 +8,17 @@ import "dart:html"
         MessagePort,
         MessageEvent,
         ErrorEvent;
-import "package:func/func.dart";
 import "dart:typed_data" show ByteBuffer, Uint8List;
 
-import 'promise.dart';
+import "package:func/func.dart";
+import "package:js/js.dart";
+
 import 'isomorphic_fetch.dart';
+import 'promise.dart';
 
 export 'dart:html' show MessageEvent, ErrorEvent;
-export 'promise.dart';
 export 'isomorphic_fetch.dart';
+export 'promise.dart';
 
 /// Type definitions for service_worker_api 0.0
 /// Project: https://developer.mozilla.org/fr/docs/Web/API/ServiceWorker_API
