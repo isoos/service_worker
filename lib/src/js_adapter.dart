@@ -3,14 +3,13 @@ library js_stream_adapter;
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:func/func.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart' as js_util;
 
 import 'js_facade/promise.dart';
 
 Stream<T> callbackToStream<J, T>(
-    dynamic object, String name, Func1<J, T> unwrapValue) {
+    dynamic object, String name, T unwrapValue(J jsValue)) {
   // ignore: close_sinks
   StreamController<T> controller = new StreamController.broadcast(sync: true);
   js_util.setProperty(object, name, allowInterop((J event) {
@@ -19,13 +18,14 @@ Stream<T> callbackToStream<J, T>(
   return controller.stream;
 }
 
-Future<T> promiseToFuture<J, T>(Promise<J> promise, [Func1<J, T> unwrapValue]) {
+Future<T> promiseToFuture<J, T>(Promise<J> promise,
+    [T unwrapValue(J jsValue)]) {
   // TODO: handle if promise object is already a future.
   Completer<T> completer = new Completer();
   promise.then(allowInterop((value) {
     T unwrapped;
     if (unwrapValue == null) {
-      unwrapped = value;
+      unwrapped = value as T;
     } else if (value != null) {
       unwrapped = unwrapValue(value);
     }
@@ -36,23 +36,27 @@ Future<T> promiseToFuture<J, T>(Promise<J> promise, [Func1<J, T> unwrapValue]) {
   return completer.future;
 }
 
-Promise futureToPromise(Future future, [Func1 wrapValue]) {
-  return new Promise(allowInterop((VoidFunc1 resolve, VoidFunc1 reject) {
-    future.then((value) {
-      dynamic wrapped;
-      if (wrapValue != null) {
-        wrapped = wrapValue(value);
-      } else if (value != null) {
-        wrapped = value;
-      }
-      resolve(wrapped);
-    }).catchError((error) {
-      reject(error);
-    });
-  }));
+Promise futureToPromise(Future future, [dynamic wrapValue(dynamic value)]) {
+  return new Promise(
+    allowInterop(
+      (void resolveFn(value), void rejectFn(error)) {
+        future.then((value) {
+          dynamic wrapped;
+          if (wrapValue != null) {
+            wrapped = wrapValue(value);
+          } else if (value != null) {
+            wrapped = value;
+          }
+          resolveFn(wrapped);
+        }).catchError((error) {
+          rejectFn(error);
+        });
+      },
+    ),
+  );
 }
 
-Iterable<T> iteratorToIterable<T>(Func0 iteratorGetter) =>
+Iterable<T> iteratorToIterable<T>(Function iteratorGetter) =>
     new _Iterable(iteratorGetter);
 
 class _Iterator<R> implements Iterator<R> {
@@ -73,7 +77,7 @@ class _Iterator<R> implements Iterator<R> {
 }
 
 class _Iterable<R> extends IterableMixin<R> {
-  final Func0 _getter;
+  final Function _getter;
   _Iterable(this._getter);
 
   @override

@@ -10,7 +10,6 @@ import "dart:html"
         ErrorEvent;
 import "dart:typed_data" show ByteBuffer, Uint8List;
 
-import "package:func/func.dart";
 import "package:js/js.dart";
 
 import 'isomorphic_fetch.dart';
@@ -19,6 +18,8 @@ import 'promise.dart';
 export 'dart:html' show MessageEvent, ErrorEvent;
 export 'isomorphic_fetch.dart';
 export 'promise.dart';
+
+typedef void CallbackFn<T>(T value);
 
 /// Type definitions for service_worker_api 0.0
 /// Project: https://developer.mozilla.org/fr/docs/Web/API/ServiceWorker_API
@@ -225,8 +226,8 @@ abstract class ServiceWorker {
 
   /// An EventListener property called whenever an event of type statechange
   /// is fired; it is basically fired anytime the ServiceWorker.state changes.
-  external VoidFunc1<Event> get onstatechange;
-  external set onstatechange(VoidFunc1<Event> v);
+  external CallbackFn<Event> get onstatechange;
+  external set onstatechange(CallbackFn<Event> v);
 }
 
 /// The PushMessageData interface of the Push API provides
@@ -659,8 +660,8 @@ abstract class ServiceWorkerRegistration {
   /// An EventListener property called whenever an event of type updatefound
   /// is fired; it is fired any time the ServiceWorkerRegistration.installing
   /// property acquires a new service worker.
-  external VoidFunc0 get onupdatefound;
-  external set onupdatefound(VoidFunc0 v);
+  external Function get onupdatefound;
+  external set onupdatefound(Function v);
 
   /// Allows you to update a service worker.
   external void update();
@@ -702,19 +703,19 @@ abstract class ServiceWorkerContainer {
   /// An event handler fired whenever a controllerchange event occurs — when
   /// the document's associated ServiceWorkerRegistration acquires a new
   /// ServiceWorkerRegistration.active worker.
-  external VoidFunc1<Event> get oncontrollerchange;
-  external set oncontrollerchange(VoidFunc1<Event> v);
+  external CallbackFn<Event> get oncontrollerchange;
+  external set oncontrollerchange(CallbackFn<Event> v);
 
   /// An event handler fired whenever an error event occurs in the associated
   /// service workers.
-  external VoidFunc1<ErrorEvent> get onerror;
-  external set onerror(VoidFunc1<ErrorEvent> v);
+  external CallbackFn<ErrorEvent> get onerror;
+  external set onerror(CallbackFn<ErrorEvent> v);
 
   /// An event handler fired whenever a message event occurs — when incoming
   /// messages are received to the ServiceWorkerContainer object (e.g. via a
   /// MessagePort.postMessage() call.)
-  external VoidFunc1<MessageEvent> get onmessage;
-  external set onmessage(VoidFunc1<MessageEvent> v);
+  external CallbackFn<MessageEvent> get onmessage;
+  external set onmessage(CallbackFn<MessageEvent> v);
 
   /// Creates or updates a ServiceWorkerRegistration for the given scriptURL.
   /// Currently available options are: scope: A USVString representing a URL
@@ -758,19 +759,19 @@ abstract class ServiceWorkerGlobalScope {
   /// An event handler fired whenever an activate event occurs — when a
   /// ServiceWorkerRegistration acquires a new ServiceWorkerRegistration.active
   /// worker.
-  external VoidFunc1<ExtendableEvent> get onactivate;
-  external set onactivate(VoidFunc1<ExtendableEvent> v);
+  external CallbackFn<ExtendableEvent> get onactivate;
+  external set onactivate(CallbackFn<ExtendableEvent> v);
 
   /// An event handler fired whenever a fetch event occurs — when a fetch()
   /// is called.
-  external VoidFunc1<FetchEvent> get onfetch;
-  external set onfetch(VoidFunc1<FetchEvent> v);
+  external CallbackFn<FetchEvent> get onfetch;
+  external set onfetch(CallbackFn<FetchEvent> v);
 
   /// An event handler fired whenever an install event occurs — when a
   /// ServiceWorkerRegistration acquires a new
   /// ServiceWorkerRegistration.installing worker.
-  external VoidFunc1<InstallEvent> get oninstall;
-  external set oninstall(VoidFunc1<InstallEvent> v);
+  external CallbackFn<InstallEvent> get oninstall;
+  external set oninstall(CallbackFn<InstallEvent> v);
 
   /// An event handler fired whenever a message event occurs — when incoming
   /// messages are received. Controlled pages can use the
@@ -782,24 +783,24 @@ abstract class ServiceWorkerGlobalScope {
   /// since we are merging the interface into `Window`, we should
   /// make sure it's compatible with `window.onmessage`
   /// onmessage: (messageevent: ExtendableMessageEvent) => void;
-  external VoidFunc1<MessageEvent> get onmessage;
-  external set onmessage(VoidFunc1<MessageEvent> v);
+  external CallbackFn<MessageEvent> get onmessage;
+  external set onmessage(CallbackFn<MessageEvent> v);
 
   /// An event handler fired whenever a notificationclick event occurs — when
   /// a user clicks on a displayed notification.
-  external VoidFunc1<NotificationEvent> get onnotificationclick;
-  external set onnotificationclick(VoidFunc1<NotificationEvent> v);
+  external CallbackFn<NotificationEvent> get onnotificationclick;
+  external set onnotificationclick(CallbackFn<NotificationEvent> v);
 
   /// An event handler fired whenever a push event occurs — when a server
   /// push notification is received.
-  external VoidFunc1<PushEvent> get onpush;
-  external set onpush(VoidFunc1<PushEvent> v);
+  external CallbackFn<PushEvent> get onpush;
+  external set onpush(CallbackFn<PushEvent> v);
 
   /// An event handler fired whenever a pushsubscriptionchange event occurs —
   /// when a push subscription has been invalidated, or is about to be
   /// invalidated (e.g. when a push service sets an expiration time).
-  external VoidFunc1<PushEvent> get onpushsubscriptionchange;
-  external set onpushsubscriptionchange(VoidFunc1<PushEvent> v);
+  external CallbackFn<PushEvent> get onpushsubscriptionchange;
+  external set onpushsubscriptionchange(CallbackFn<PushEvent> v);
 
   /// Allows the current service worker registration to progress from waiting
   /// to active state while service worker clients are using it.

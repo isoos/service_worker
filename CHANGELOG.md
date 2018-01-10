@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Remove `package:func` dependency.
+
 ## 0.1.0
 
 - Upgraded dependencies.
