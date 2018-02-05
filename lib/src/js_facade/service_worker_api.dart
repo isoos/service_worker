@@ -1,16 +1,16 @@
 @JS()
 library service_worker_api;
 
-import "dart:html"
+import 'dart:html'
     show
         Event,
         Blob,
         MessagePort,
         MessageEvent,
         ErrorEvent;
-import "dart:typed_data" show ByteBuffer, Uint8List;
+import 'dart:typed_data' show ByteBuffer, Uint8List;
 
-import "package:js/js.dart";
+import 'package:js/js.dart';
 
 import 'isomorphic_fetch.dart';
 import 'promise.dart';
@@ -27,7 +27,7 @@ typedef void CallbackFn<T>(T value);
 /// Definitions: https://github.com/borisyankov/DefinitelyTyped
 /// TypeScript Version: 2.1
 
-/// <reference types="whatwg-fetch" />
+/// <reference types='whatwg-fetch' />
 
 /// An CacheOptions object allowing you to set specific control options for the
 /// matching done in the match operation.

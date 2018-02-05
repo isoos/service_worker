@@ -14,7 +14,7 @@ import 'dart:html'
         MessagePort,
         Worker;
 import 'dart:indexed_db';
-import "dart:typed_data" show ByteBuffer;
+import 'dart:typed_data' show ByteBuffer;
 
 import 'package:js/js.dart';
 import 'package:js/js_util.dart' as js_util;

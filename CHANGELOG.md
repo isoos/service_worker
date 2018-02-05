@@ -2,6 +2,8 @@
 
 ## 0.1.2-dev
 
+- Style cleanup: preferring single quotes.
+
 ## 0.1.1
 
 - Remove `package:func` dependency.

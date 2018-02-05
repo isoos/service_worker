@@ -1,10 +1,10 @@
 @JS()
 library isomorphic_fetch;
 
-import "dart:html" show Blob, FormData;
-import "dart:typed_data" show ByteBuffer;
+import 'dart:html' show Blob, FormData;
+import 'dart:typed_data' show ByteBuffer;
 
-import "package:js/js.dart";
+import 'package:js/js.dart';
 
 import 'promise.dart';
 
@@ -13,42 +13,42 @@ import 'promise.dart';
 /// Definitions by: Todd Lucas <https://github.com/toddlucas>
 /// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 /*type RequestType =
-    "" | "audio" | "font" | "image" | "script" | "style" | "track" | "video";*/
-/*type RequestDestination = "" |
-    "document" |
-    "embed" |
-    "font" |
-    "image" |
-    "manifest" |
-    "media" |
-    "object" |
-    "report" |
-    "script" |
-    "serviceworker" |
-    "sharedworker" |
-    "style" |
-    "worker" |
-    "xslt";*/
-/*type RequestMode = "navigate" | "same-origin" | "no-cors" | "cors";*/
-/*type RequestCredentials = "omit" | "same-origin" | "include";*/
-/*type RequestCache = "default" |
-    "no-store" |
-    "reload" |
-    "no-cache" |
-    "force-cache" |
-    "only-if-cached";*/
-/*type RequestRedirect = "follow" | "error" | "manual";*/
+    '' | 'audio' | 'font' | 'image' | 'script' | 'style' | 'track' | 'video';*/
+/*type RequestDestination = '' |
+    'document' |
+    'embed' |
+    'font' |
+    'image' |
+    'manifest' |
+    'media' |
+    'object' |
+    'report' |
+    'script' |
+    'serviceworker' |
+    'sharedworker' |
+    'style' |
+    'worker' |
+    'xslt';*/
+/*type RequestMode = 'navigate' | 'same-origin' | 'no-cors' | 'cors';*/
+/*type RequestCredentials = 'omit' | 'same-origin' | 'include';*/
+/*type RequestCache = 'default' |
+    'no-store' |
+    'reload' |
+    'no-cache' |
+    'force-cache' |
+    'only-if-cached';*/
+/*type RequestRedirect = 'follow' | 'error' | 'manual';*/
 /*type ResponseType =
-    "basic" | "cors" | "default" | "error" | "opaque" | "opaqueredirect";*/
-/*type ReferrerPolicy = "" |
-    "no-referrer" |
-    "no-referrer-when-downgrade" |
-    "same-origin" |
-    "origin" |
-    "strict-origin" |
-    "origin-when-cross-origin" |
-    "strict-origin-when-cross-origin" |
-    "unsafe-url";*/
+    'basic' | 'cors' | 'default' | 'error' | 'opaque' | 'opaqueredirect';*/
+/*type ReferrerPolicy = '' |
+    'no-referrer' |
+    'no-referrer-when-downgrade' |
+    'same-origin' |
+    'origin' |
+    'strict-origin' |
+    'origin-when-cross-origin' |
+    'strict-origin-when-cross-origin' |
+    'unsafe-url';*/
 @anonymous
 @JS()
 abstract class HeadersInterface {
