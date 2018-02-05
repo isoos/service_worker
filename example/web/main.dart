@@ -22,6 +22,7 @@ Future main() async {
   });
 
   sw.ServiceWorker active = registration.active;
+  // ignore: cascade_invocations
   active.postMessage('x');
   print('sent');
 

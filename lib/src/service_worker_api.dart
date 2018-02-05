@@ -690,6 +690,7 @@ class FetchEvent implements Event {
 
   void respondWith(Future<Response> response) {
     _callMethod(_delegate, 'respondWith',
+        // ignore: strong_mode_uses_dynamic_as_bottom
         [futureToPromise(response, (Response r) => r._delegate)]);
   }
 
