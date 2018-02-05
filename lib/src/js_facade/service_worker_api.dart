@@ -242,9 +242,7 @@ abstract class PushMessageData {
   external Blob blob();
 
   /// Extracts the data as a JSON object.
-  /*external dynamic json();*/
-  /*external T json<T>();*/
-  external dynamic /*dynamic|T*/ json/*<T>*/();
+  external dynamic json<T>();
 
   /// Extracts the data as a plain text string.
   external String text();

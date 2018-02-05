@@ -91,9 +91,7 @@ abstract class BodyInterface {
   external Promise<ByteBuffer> arrayBuffer();
   external Promise<Blob> blob();
   external Promise<FormData> formData();
-  /*external Promise<dynamic> json();*/
-  /*external Promise<T> json<T>();*/
-  external Promise<dynamic> /*Promise<dynamic>|Promise<T>*/ json/*<T>*/();
+  external Promise<T> json<T>();
   external Promise<String> text();
 }
 
@@ -106,9 +104,7 @@ class Body implements BodyInterface {
   external Promise<ByteBuffer> arrayBuffer();
   external Promise<Blob> blob();
   external Promise<FormData> formData();
-  /*external Promise<dynamic> json();*/
-  /*external Promise<T> json<T>();*/
-  external Promise<dynamic> /*Promise<dynamic>|Promise<T>*/ json/*<T>*/();
+  external Promise<T> json<T>();
   external Promise<String> text();
 }
 

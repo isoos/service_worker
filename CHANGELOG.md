@@ -3,6 +3,7 @@
 ## 0.1.2-dev
 
 - Style cleanup: preferring single quotes.
+- Removed generic type comments.
 
 ## 0.1.1
 
