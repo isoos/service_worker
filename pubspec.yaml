@@ -1,5 +1,5 @@
 name: service_worker
-version: 0.1.1
+version: 0.1.2-dev
 author: Istvan Soos <istvan.soos@gmail.com>
 description: Service Worker API
 
