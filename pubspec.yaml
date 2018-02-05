@@ -1,7 +1,7 @@
 name: service_worker
-version: 0.1.2-dev
+version: 0.1.2
 author: Istvan Soos <istvan.soos@gmail.com>
-description: Service Worker API
+description: JavaScript bindings for the Service Worker API.
 
 homepage: https://github.com/isoos/service_worker
 

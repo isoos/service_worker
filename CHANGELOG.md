@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2-dev
+## 0.1.2
 
 - Style cleanup: preferring single quotes.
 - Removed generic type comments.
