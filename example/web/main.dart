@@ -3,30 +3,38 @@ import 'dart:html';
 
 import 'package:service_worker/window.dart' as sw;
 
+void _log(Object o) => print('  MAIN: $o');
+
 Future main() async {
-  querySelector('#output').text = 'Your Dart app is running.';
+  querySelector('#output').text =
+      'Your Dart app is running.\nOpen your Developer console to see details.';
 
   if (sw.isNotSupported) {
-    print('ServiceWorkers are not supported.');
+    _log('ServiceWorkers are not supported.');
     return;
   }
 
   await sw.register('sw.dart.js');
-  print('registered');
+  _log('registered');
 
   sw.ServiceWorkerRegistration registration = await sw.ready;
-  print('ready');
+  _log('ready');
 
   sw.onMessage.listen((MessageEvent event) {
-    print('reply received: ${event.data}');
+    _log('reply received: ${event.data}');
   });
 
-  sw.ServiceWorker active = registration.active;
-  // ignore: cascade_invocations
-  active.postMessage('x');
-  print('sent');
+  var message = 'Sample message: ${new DateTime.now()}';
+  _log('Sending message: `$message`');
+  registration.active.postMessage(message);
+  _log('Message sent: `$message`');
 
-  sw.PushSubscription subs = await registration.pushManager
-      .subscribe(new sw.PushSubscriptionOptions(userVisibleOnly: true));
-  print('endpoint: ${subs.endpoint}');
+  try {
+    var subs = await registration.pushManager
+        .subscribe(new sw.PushSubscriptionOptions(userVisibleOnly: true));
+    _log('endpoint: ${subs.endpoint}');
+  } on DomException catch (e) {
+    _log('Error: Adding push subscription failed.');
+    _log('       See github.com/isoos/service_worker/issues/10');
+  }
 }
