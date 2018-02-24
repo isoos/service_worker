@@ -19,7 +19,7 @@ export 'src/service_worker_api.dart'
         ServiceWorker,
         ShowNotificationOptions;
 
-ServiceWorkerContainer _self = ServiceWorkerContainer.navigatorContainer;
+ServiceWorkerContainer get _self => ServiceWorkerContainer.navigatorContainer;
 
 /// API entry point for web apps (window.navigator.serviceWorker).
 /// Deprecated, use top-level fields and methods instead.
