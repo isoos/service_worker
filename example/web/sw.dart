@@ -4,51 +4,56 @@ import 'dart:async';
 
 import 'package:service_worker/worker.dart';
 
+void _log(Object o) => print('WORKER: $o');
+
 // Reminder: ServiceWorker mustn't use async in the [main] method.
 void main(List<String> args) {
-  print('SW started.');
+  var id = 0;
+
+  _log('SW started.');
 
   onInstall.listen((InstallEvent event) {
-    print('Installing.');
+    _log('Installing.');
     event.waitUntil(_initCache());
   });
 
   onActivate.listen((ExtendableEvent event) {
-    print('Activating.');
+    _log('Activating.');
   });
 
   onFetch.listen((FetchEvent event) {
-    print('fetch request: ${event.request}');
-    event.respondWith(_getCachedOrFetch(event.request));
+    _log('Fetch request for $id: ${event.request.url}');
+    event.respondWith(_getCachedOrFetch(id, event.request));
+    id++;
   });
 
   onMessage.listen((ExtendableMessageEvent event) {
-    print('onMessage received ${event.data}');
+    _log('Message received: `${event.data}`');
     event.source.postMessage('reply from SW');
-    print('replied');
+    _log('Sent reply');
   });
 
   onPush.listen((PushEvent event) {
-    print('onPush received: ${event.data}');
+    _log('onPush received: `${event.data.text()}`');
     registration.showNotification('Notification: ${event.data}');
   });
 }
 
-Future<Response> _getCachedOrFetch(Request request) async {
-  Response r = await caches.match(request);
+Future<Response> _getCachedOrFetch(int id, Request request) async {
+  var r = await caches.match(request);
   if (r != null) {
-    print('Found in cache: ${request.url} $r');
+    _log('  $id: Found in cache');
     return r;
   } else {
-    print('No cached version. Fetching: ${request.url}');
+    _log('  $id: No cached version. Fetching: ${request.url}');
     r = await fetch(request);
-    print('Got for ${request.url}: $r');
+    _log('  $id: Got for ${request.url}: ${r.statusText}');
   }
   return r;
 }
 
 Future _initCache() async {
-  print('Init cache...');
+  _log('Init cache...');
   Cache cache = await caches.open('offline-v1');
   await cache.addAll([
     '/',
@@ -57,5 +62,5 @@ Future _initCache() async {
     '/styles.css',
     '/packages/browser/dart.js',
   ]);
-  print('Cache initialized.');
+  _log('Cache initialized.');
 }
