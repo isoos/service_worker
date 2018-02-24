@@ -675,6 +675,14 @@ abstract class ServiceWorkerRegistration {
 abstract class ServiceWorkerRegisterOptions {
   external String get scope;
   external set scope(String v);
+
+  /// [scope] represents a URL that defines a service worker's registration
+  /// scope; that is, what range of URLs a service worker can control.
+  ///
+  /// This is usually a relative URL.
+  /// The default value is the URL you'd get if you resolved './' using the web
+  /// page's location as the base. It is not, as is commonly believed, relative
+  /// to the service worker's location.
   external factory ServiceWorkerRegisterOptions({String scope});
 }
 
