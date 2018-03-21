@@ -6,7 +6,8 @@ description: JavaScript bindings for the Service Worker API.
 homepage: https://github.com/isoos/service_worker
 
 environment:
-  sdk: ">=1.21.0 <2.0.0"
+  # Required for the updated dart:html bindings.
+  sdk: ">=2.0.0-dev.40.0 <2.0.0"
 
 dependencies:
   js: ^0.6.1

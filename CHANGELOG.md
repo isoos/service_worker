@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0
+
+- Updated to work with `dart:html` for `2.0.0-dev.40.0`:
+  - `ExtendableEvent`, `FetchEvent` removes `deepPath` or `scoped` members.
+  - Added `composed` and `composedPath` members.
+- Migrate off deprecated APIs from the core libraries.
+- Fixed a strong-mode cast warning that will become an error soon.
+
 ## 0.1.2
 
 - Style cleanup: preferring single quotes.

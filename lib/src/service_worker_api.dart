@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:convert' show JSON;
+import 'dart:convert' show json;
 import 'dart:html'
     show
         Blob,
@@ -571,10 +571,10 @@ class PushSubscription {
   ///
   /// Returns an empty map if no keys are present.
   Map<String, String> getKeysAsString() {
-    Map map = JSON.decode(facade.jsonStringify(_delegate));
+    Map map = json.decode(facade.jsonStringify(_delegate));
     var keys = map['keys'];
     if (keys is Map) {
-      return keys as Map<String, String>;
+      return keys.cast<String, String>();
     }
     return {};
   }
@@ -627,9 +627,6 @@ class ExtendableEvent implements Event {
   EventTarget get currentTarget => _getProperty(_delegate, 'currentTarget');
 
   @override
-  List<EventTarget> deepPath() => _callMethod(_delegate, 'deepPath', []);
-
-  @override
   bool get defaultPrevented => _getProperty(_delegate, 'defaultPrevented');
 
   @override
@@ -648,14 +645,17 @@ class ExtendableEvent implements Event {
   void preventDefault() => _callMethod(_delegate, 'preventDefault', []);
 
   @override
-  bool get scoped => _getProperty(_delegate, 'scoped');
-
-  @override
   void stopImmediatePropagation() =>
       _callMethod(_delegate, 'stopImmediatePropagation', []);
 
   @override
   void stopPropagation() => _callMethod(_delegate, 'stopPropagation', []);
+
+  @override
+  bool get composed => _getProperty(_delegate, 'composed');
+
+  @override
+  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the ServiceWorkerGlobalScope.onfetch handler,
@@ -713,9 +713,6 @@ class FetchEvent implements Event {
   EventTarget get currentTarget => _getProperty(_delegate, 'currentTarget');
 
   @override
-  List<EventTarget> deepPath() => _callMethod(_delegate, 'deepPath', []);
-
-  @override
   bool get defaultPrevented => _getProperty(_delegate, 'defaultPrevented');
 
   @override
@@ -734,14 +731,17 @@ class FetchEvent implements Event {
   void preventDefault() => _callMethod(_delegate, 'preventDefault', []);
 
   @override
-  bool get scoped => _getProperty(_delegate, 'scoped');
-
-  @override
   void stopImmediatePropagation() =>
       _callMethod(_delegate, 'stopImmediatePropagation', []);
 
   @override
   void stopPropagation() => _callMethod(_delegate, 'stopPropagation', []);
+
+  @override
+  bool get composed => _getProperty(_delegate, 'composed');
+
+  @override
+  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the oninstall handler, the InstallEvent interface
