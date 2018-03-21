@@ -33,7 +33,7 @@ Future main() async {
     var subs = await registration.pushManager
         .subscribe(new sw.PushSubscriptionOptions(userVisibleOnly: true));
     _log('endpoint: ${subs.endpoint}');
-  } on DomException catch (e) {
+  } on DomException catch (_) {
     _log('Error: Adding push subscription failed.');
     _log('       See github.com/isoos/service_worker/issues/10');
   }
