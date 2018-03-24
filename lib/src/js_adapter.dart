@@ -36,10 +36,10 @@ Future<T> promiseToFuture<J, T>(Promise<J> promise,
   return completer.future;
 }
 
-Promise futureToPromise(Future future, [dynamic wrapValue(dynamic value)]) {
-  return new Promise(
+Promise<J> futureToPromise<T, J>(Future<T> future, [J wrapValue(T value)]) {
+  return new Promise<J>(
     allowInterop(
-      (void resolveFn(value), void rejectFn(error)) {
+      (void resolveFn(J value), void rejectFn(error)) {
         future.then((value) {
           dynamic wrapped;
           if (wrapValue != null) {
