@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1
+
+- Fixed a use of `dynamic` as bottom by adding type parameters to
+  `futureToPromise`.
+
 ## 0.2.0
 
 - Updated to work with `dart:html` for `2.0.0-dev.40.0`:
@@ -59,7 +64,7 @@
 
 ## 0.0.8
 
-- ServiceWorkerClient.postMessage() to use List as transfer objects parameter. 
+- ServiceWorkerClient.postMessage() to use List as transfer objects parameter.
 - ServiceWorker.postMessage(): any Transferable object can be set, not only MessagePorts.
 
 ## 0.0.7
