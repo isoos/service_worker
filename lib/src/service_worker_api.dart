@@ -1048,7 +1048,8 @@ class Headers {
   String operator [](String name) => _callMethod(_delegate, 'get', [name]);
   void operator []=(String name, String value) =>
       _callMethod(_delegate, 'set', [name, value]);
-  List<String> getAll(String name) => _callMethod(_delegate, 'getAll', [name]);
+  List<String> getAll(String name) =>
+      (_callMethod(_delegate, 'getAll', [name]) as List).cast<String>();
 
   bool has(String name) => _callMethod(_delegate, 'has', [name]);
 
