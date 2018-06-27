@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- Fix runtime errors casting List<T>
+
 ## 0.2.1
 
 - Fixed a use of `dynamic` as bottom by adding type parameters to
