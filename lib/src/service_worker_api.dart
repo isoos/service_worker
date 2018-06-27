@@ -656,7 +656,8 @@ class ExtendableEvent implements Event {
   bool get composed => _getProperty(_delegate, 'composed');
 
   @override
-  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
+  List<EventTarget> composedPath() =>
+      (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the ServiceWorkerGlobalScope.onfetch handler,
@@ -741,7 +742,8 @@ class FetchEvent implements Event {
   bool get composed => _getProperty(_delegate, 'composed');
 
   @override
-  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
+  List<EventTarget> composedPath() =>
+      (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the oninstall handler, the InstallEvent interface
