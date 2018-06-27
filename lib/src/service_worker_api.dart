@@ -179,7 +179,6 @@ class ServiceWorkerContainer {
   Stream<Event> _onControllerChange;
   Stream<ErrorEvent> _onError;
   Stream<MessageEvent> _onMessage;
-
   // Masked type: facade.ServiceWorkerContainer
   final _delegate;
 
@@ -256,7 +255,6 @@ class ServiceWorkerContainer {
 class CacheStorage {
   // Masked type: facade.CacheStorage
   final _delegate;
-
   CacheStorage._(this._delegate);
 
   /// Checks if a given Request is a key in any of the Cache objects that the
@@ -299,7 +297,6 @@ class CacheStorage {
 class Cache {
   // Masked type: facade.Cache
   final _delegate;
-
   Cache._(this._delegate);
 
   /// Returns a Promise that resolves to the response associated with the first
@@ -363,7 +360,6 @@ class Cache {
 class ServiceWorkerClients {
   // Masked type: facade.ServiceWorkerClients
   final _delegate;
-
   ServiceWorkerClients._(this._delegate);
 
   /// Gets a service worker client matching a given id and returns it in a Promise.
@@ -400,7 +396,6 @@ class ServiceWorkerClients {
 class ServiceWorkerClient {
   // Masked type: facade.ServiceWorkerClient
   final _delegate;
-
   ServiceWorkerClient._(this._delegate);
 
   /// Allows a service worker client to send a message to a ServiceWorker.
@@ -443,7 +438,6 @@ class ServiceWorkerRegistration implements EventTarget {
   final _delegate;
   PushManager _pushManager;
   Stream _onUpdateFound;
-
   ServiceWorkerRegistration._(this._delegate);
 
   /// The raw JS object reference.
@@ -532,7 +526,6 @@ class ServiceWorkerRegistration implements EventTarget {
 class PushManager {
   // Masked type: facade.PushManager
   final _delegate;
-
   PushManager._(this._delegate);
 
   /// Returns a promise that resolves to a PushSubscription with details of a
@@ -564,7 +557,6 @@ class PushManager {
 class PushSubscription {
   // Masked type: facade.PushSubscription
   final _delegate;
-
   PushSubscription._(this._delegate);
 
   /// The endpoint associated with the push subscription.
@@ -608,7 +600,6 @@ abstract class PushSubscriptionKeys {
 class ExtendableEvent implements Event {
   // Masked type: facade.ExtendableEvent
   final _delegate;
-
   ExtendableEvent._(this._delegate);
 
   /// Extends the lifetime of the event.
@@ -665,8 +656,7 @@ class ExtendableEvent implements Event {
   bool get composed => _getProperty(_delegate, 'composed');
 
   @override
-  List<EventTarget> composedPath() =>
-      (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
+  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the ServiceWorkerGlobalScope.onfetch handler,
@@ -680,7 +670,6 @@ class FetchEvent implements Event {
   final _delegate;
   Request _request;
   ServiceWorkerClient _client;
-
   FetchEvent._(this._delegate);
 
   /// Returns a Boolean that is true if the event was dispatched with the
@@ -752,8 +741,7 @@ class FetchEvent implements Event {
   bool get composed => _getProperty(_delegate, 'composed');
 
   @override
-  List<EventTarget> composedPath() =>
-      (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
+  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the oninstall handler, the InstallEvent interface
@@ -763,7 +751,6 @@ class FetchEvent implements Event {
 /// during installation.
 class InstallEvent extends ExtendableEvent {
   ServiceWorker _activeWorker;
-
   // Masked type: facade.InstallEvent
   InstallEvent._(delegate) : super._(delegate);
 
@@ -780,7 +767,6 @@ class ServiceWorker implements Worker {
   Stream<Event> _onStateChange;
   Stream<ErrorEvent> _onError;
   Stream<MessageEvent> _onMessage;
-
   ServiceWorker._(this._delegate);
 
   static ServiceWorker _fromDelegate(delegate) {
@@ -913,7 +899,6 @@ class PushEvent extends ExtendableEvent {
 class PushMessageData {
   // Masked type: facade.PushMessageData
   final _delegate;
-
   PushMessageData._(this._delegate);
 
   /// Extracts the data as a ByteBuffer object.
@@ -932,7 +917,6 @@ class PushMessageData {
 class Body {
   // Masked type: facade.Body
   final _delegate;
-
   Body._(this._delegate);
 
   /// indicates whether the body has been read yet
@@ -962,7 +946,6 @@ class Request extends Body {
   Request._(delegate) : super._(delegate);
 
   String get method => _getProperty(_delegate, 'method');
-
   String get url => _getProperty(_delegate, 'url');
 
   Headers get headers =>
@@ -1008,7 +991,6 @@ class Request extends Body {
 
 class Response extends Body {
   Headers _headers;
-
   // Masked type: facade.Response
   Response._(delegate) : super._(delegate);
 
@@ -1054,7 +1036,6 @@ class Response extends Body {
 class Headers {
   // Masked type: facade.Headers
   final _delegate;
-
   Headers._(this._delegate);
 
   void append(String name, String value) =>
@@ -1063,10 +1044,8 @@ class Headers {
   void delete(String name) => _callMethod(_delegate, 'delete', [name]);
 
   String operator [](String name) => _callMethod(_delegate, 'get', [name]);
-
   void operator []=(String name, String value) =>
       _callMethod(_delegate, 'set', [name, value]);
-
   List<String> getAll(String name) => _callMethod(_delegate, 'getAll', [name]);
 
   bool has(String name) => _callMethod(_delegate, 'has', [name]);
@@ -1088,25 +1067,16 @@ class Headers {
 
 class WorkerLocation {
   dynamic _delegate;
-
   WorkerLocation(this._delegate);
 
   String get href => _getProperty(_delegate, 'href');
-
   String get protocol => _getProperty(_delegate, 'protocol');
-
   String get host => _getProperty(_delegate, 'host');
-
   String get hostname => _getProperty(_delegate, 'hostname');
-
   String get origin => _getProperty(_delegate, 'origin');
-
   String get port => _getProperty(_delegate, 'port');
-
   String get pathname => _getProperty(_delegate, 'pathname');
-
   String get search => _getProperty(_delegate, 'search');
-
   String get hash => _getProperty(_delegate, 'hash');
 
   @override
