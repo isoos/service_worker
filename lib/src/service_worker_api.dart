@@ -287,8 +287,9 @@ class CacheStorage {
   /// corresponding to all of the named Cache objects tracked by the
   /// CacheStorage. Use this method to iterate over a list of all the
   /// Cache objects.
-  Future<List<String>> keys() =>
-      promiseToFuture(_callMethod(_delegate, 'keys', []));
+  Future<List<String>> keys() => promiseToFuture(
+      _callMethod(_delegate, 'keys', []),
+      (List list) => new List<String>.from(list));
 }
 
 /// Represents the storage for Request / Response object pairs that are cached as
@@ -655,7 +656,8 @@ class ExtendableEvent implements Event {
   bool get composed => _getProperty(_delegate, 'composed');
 
   @override
-  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
+  List<EventTarget> composedPath() =>
+      (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the ServiceWorkerGlobalScope.onfetch handler,
@@ -740,7 +742,8 @@ class FetchEvent implements Event {
   bool get composed => _getProperty(_delegate, 'composed');
 
   @override
-  List<EventTarget> composedPath() => (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
+  List<EventTarget> composedPath() =>
+      (_callMethod(_delegate, 'composedPath', []) as List).cast<EventTarget>();
 }
 
 /// The parameter passed into the oninstall handler, the InstallEvent interface

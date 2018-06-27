@@ -1,13 +1,7 @@
 @JS()
 library service_worker_api;
 
-import 'dart:html'
-    show
-        Event,
-        Blob,
-        MessagePort,
-        MessageEvent,
-        ErrorEvent;
+import 'dart:html' show Event, Blob, MessagePort, MessageEvent, ErrorEvent;
 import 'dart:typed_data' show ByteBuffer, Uint8List;
 
 import 'package:js/js.dart';
