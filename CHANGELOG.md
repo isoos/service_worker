@@ -1,4 +1,6 @@
-# Changelog
+## 0.2.3
+
+- Support Dart 2 stable.
 
 ## 0.2.2
 

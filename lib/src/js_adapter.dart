@@ -47,7 +47,7 @@ Promise<J> futureToPromise<T, J>(Future<T> future, [J wrapValue(T value)]) {
           } else if (value != null) {
             wrapped = value;
           }
-          resolveFn(wrapped);
+          resolveFn(wrapped as J);
         }).catchError((error) {
           rejectFn(error);
         });
@@ -71,7 +71,7 @@ class _Iterator<R> implements Iterator<R> {
   bool moveNext() {
     dynamic m = js_util.callMethod(_object, 'next', []);
     bool hasValue = js_util.getProperty(m, 'done') == false;
-    _current = hasValue ? js_util.getProperty(m, 'value') : null;
+    _current = hasValue ? js_util.getProperty(m, 'value') as R : null;
     return hasValue;
   }
 }

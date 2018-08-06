@@ -202,18 +202,18 @@ class ServiceWorkerContainer {
   /// the document's associated ServiceWorkerRegistration acquires a new
   /// ServiceWorkerRegistration.active worker.
   Stream<Event> get onControllerChange => _onControllerChange ??=
-      callbackToStream(_delegate, 'oncontrollerchange', (j) => j);
+      callbackToStream(_delegate, 'oncontrollerchange', (j) => j as Event);
 
   /// An event handler fired whenever an error event occurs in the associated
   /// service workers.
-  Stream<ErrorEvent> get onError =>
-      _onError ??= callbackToStream(_delegate, 'onerror', (j) => j);
+  Stream<ErrorEvent> get onError => _onError ??=
+      callbackToStream(_delegate, 'onerror', (j) => j as ErrorEvent);
 
   /// An event handler fired whenever a message event occurs — when incoming
   /// messages are received to the ServiceWorkerContainer object (e.g. via a
   /// MessagePort.postMessage() call.)
-  Stream<MessageEvent> get onMessage =>
-      _onMessage ??= callbackToStream(_delegate, 'onmessage', (j) => j);
+  Stream<MessageEvent> get onMessage => _onMessage ??=
+      callbackToStream(_delegate, 'onmessage', (j) => j as MessageEvent);
 
   /// Creates or updates a ServiceWorkerRegistration for the given scriptURL.
   /// Currently available options are: scope: A USVString representing a URL
@@ -237,10 +237,11 @@ class ServiceWorkerContainer {
   /// Returns all ServiceWorkerRegistrations associated with a
   /// ServiceWorkerContainer in an array.  If the method can't return
   /// ServiceWorkerRegistrations, it returns a Promise.
-  Future<List<ServiceWorkerRegistration>> getRegistrations() => promiseToFuture(
-      _callMethod(_delegate, 'getRegistrations', []),
-      (List list) =>
-          list.map((j) => new ServiceWorkerRegistration._(j)).toList());
+  Future<List<ServiceWorkerRegistration>> getRegistrations() =>
+      promiseToFuture<List, List<ServiceWorkerRegistration>>(
+          _callMethod(_delegate, 'getRegistrations', []),
+          (List list) =>
+              list.map((j) => new ServiceWorkerRegistration._(j)).toList());
 
   /// Attach an event listener.
   void addEventListener<K>(String type, listener(K event), [bool useCapture]) {
@@ -287,7 +288,7 @@ class CacheStorage {
   /// corresponding to all of the named Cache objects tracked by the
   /// CacheStorage. Use this method to iterate over a list of all the
   /// Cache objects.
-  Future<List<String>> keys() => promiseToFuture(
+  Future<List<String>> keys() => promiseToFuture<List, List<String>>(
       _callMethod(_delegate, 'keys', []),
       (List list) => new List<String>.from(list));
 }
@@ -311,7 +312,7 @@ class Cache {
   /// the Cache object.
   Future<List<Response>> matchAll(dynamic /*Request|String*/ request,
           [CacheOptions options]) =>
-      promiseToFuture(
+      promiseToFuture<List, List<Response>>(
           _callMethod(_delegate, 'matchAll', [_wrapRequest(request), options]),
           (List list) => list?.map((item) => new Response._(item))?.toList());
 
@@ -350,7 +351,8 @@ class Cache {
         params.add(options);
       }
     }
-    return promiseToFuture(_callMethod(_delegate, 'keys', params),
+    return promiseToFuture<List, List<Request>>(
+        _callMethod(_delegate, 'keys', params),
         (List list) => list?.map((item) => new Request._(item))?.toList());
   }
 }
@@ -374,7 +376,7 @@ class ServiceWorkerClients {
   /// controlled by the service worker.
   Future<List<ServiceWorkerClient>> matchAll(
           [ServiceWorkerClientsMatchOptions options]) =>
-      promiseToFuture(
+      promiseToFuture<List, List<ServiceWorkerClient>>(
           _callMethod(_delegate, 'matchAll', [options]),
           (List list) =>
               list?.map((j) => new ServiceWorkerClient._(j))?.toList());
@@ -789,8 +791,8 @@ class ServiceWorker implements Worker {
 
   /// An EventListener property called whenever an event of type statechange
   /// is fired; it is basically fired anytime the ServiceWorker.state changes.
-  Stream<Event> get onStateChange =>
-      _onStateChange ??= callbackToStream(_delegate, 'onstatechange', (j) => j);
+  Stream<Event> get onStateChange => _onStateChange ??=
+      callbackToStream(_delegate, 'onstatechange', (j) => j as Event);
 
   @override
   void addEventListener(String type, EventListener listener,
@@ -809,15 +811,15 @@ class ServiceWorker implements Worker {
   /// An event handler fired whenever an error event occurs in the associated
   /// service workers.
   @override
-  Stream<ErrorEvent> get onError =>
-      _onError ??= callbackToStream(_delegate, 'onerror', (j) => j);
+  Stream<ErrorEvent> get onError => _onError ??=
+      callbackToStream(_delegate, 'onerror', (j) => j as ErrorEvent);
 
   /// An event handler fired whenever a message event occurs — when incoming
   /// messages are received to the ServiceWorkerContainer object (e.g. via a
   /// MessagePort.postMessage() call.)
   @override
-  Stream<MessageEvent> get onMessage =>
-      _onMessage ??= callbackToStream(_delegate, 'onmessage', (j) => j);
+  Stream<MessageEvent> get onMessage => _onMessage ??=
+      callbackToStream(_delegate, 'onmessage', (j) => j as MessageEvent);
 
   @override
   void postMessage(dynamic message, [List<dynamic> transfer]) {
@@ -1087,11 +1089,12 @@ class WorkerLocation {
 }
 
 // Utility method to mask the typed JS facade as JSObject
-dynamic _callMethod(object, String method, List args) =>
-    js_util.callMethod(object, method, args);
+T _callMethod<T>(object, String method, List args) =>
+    js_util.callMethod(object, method, args) as T;
 
 // Utility method to mask the typed JS facade as JSObject
-dynamic _getProperty(object, String name) => js_util.getProperty(object, name);
+T _getProperty<T>(object, String name) =>
+    js_util.getProperty(object, name) as T;
 
 dynamic _wrapRequest(dynamic /*Request|String*/ request) {
   if (request == null) return null;
