@@ -1,13 +1,12 @@
 name: service_worker
-version: 0.2.2
+version: 0.2.3
 author: Istvan Soos <istvan.soos@gmail.com>
 description: JavaScript bindings for the Service Worker API.
 
 homepage: https://github.com/isoos/service_worker
 
 environment:
-  # Required for the updated dart:html bindings.
-  sdk: ">=2.0.0-dev.40.0 <2.0.0"
+  sdk: ">=2.0.0-dev.40.0 <3.0.0"
 
 dependencies:
   js: ^0.6.1
