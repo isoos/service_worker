@@ -574,7 +574,8 @@ class PushSubscription {
   ///
   /// Returns an empty map if no keys are present.
   Map<String, String> getKeysAsString() {
-    Map map = json.decode(facade.jsonStringify(_delegate));
+    var map =
+        json.decode(facade.jsonStringify(_delegate)) as Map<String, dynamic>;
     var keys = map['keys'];
     if (keys is Map) {
       return keys.cast<String, String>();
