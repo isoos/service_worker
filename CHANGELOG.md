@@ -1,3 +1,8 @@
+## 0.2.4
+
+- Removed `fakeConstructor$` from JavaScript facade classes which caused breaks
+  in recent Dart SDKs.
+
 ## 0.2.3
 
 - Support Dart 2 stable.
