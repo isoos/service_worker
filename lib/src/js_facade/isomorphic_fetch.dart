@@ -68,8 +68,6 @@ abstract class HeadersInterface {
 /*type HeadersInit = Headers | string[] | { [index: string]: string };*/
 @JS()
 class Headers implements HeadersInterface {
-  // @Ignore
-  Headers.fakeConstructor$();
   external factory Headers(
       [dynamic /*Headers|List<String>|JSMap of <String,String>*/ init]);
   external void append(String name, String value);
@@ -97,8 +95,6 @@ abstract class BodyInterface {
 
 @JS()
 class Body implements BodyInterface {
-  // @Ignore
-  Body.fakeConstructor$();
   external bool get bodyUsed;
   external set bodyUsed(bool v);
   external Promise<ByteBuffer> arrayBuffer();
@@ -192,8 +188,6 @@ abstract class RequestInit {
 /*type RequestInfo = RequestInterface | string;*/
 @JS()
 class Request extends Body implements RequestInterface {
-  // @Ignore
-  Request.fakeConstructor$() : super.fakeConstructor$();
   external factory Request(dynamic /*RequestInterface|String*/ input,
       [RequestInit init]);
   external String get method;
@@ -274,8 +268,6 @@ abstract class ResponseInit {
 
 @JS()
 class Response extends Body implements ResponseInterface {
-  // @Ignore
-  Response.fakeConstructor$() : super.fakeConstructor$();
   external factory Response(
       [dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ body,
       ResponseInit init]);
