@@ -50,10 +50,10 @@ abstract class CacheOptions {
   external String get cacheName;
   external set cacheName(String v);
   external factory CacheOptions(
-      {bool ignoreSearch,
-      bool ignoreMethod,
-      bool ignoreVary,
-      String cacheName});
+      {bool? ignoreSearch,
+      bool? ignoreMethod,
+      bool? ignoreVary,
+      String? cacheName});
 }
 
 /// Represents the storage for Request / Response object pairs that are cached as
@@ -64,12 +64,12 @@ abstract class Cache {
   /// Returns a Promise that resolves to the response associated with the first
   /// matching request in the Cache object.
   external Promise<Response> match(dynamic /*Request|String*/ request,
-      [CacheOptions options]);
+      [CacheOptions? options]);
 
   /// Returns a Promise that resolves to an array of all matching responses in
   /// the Cache object.
   external Promise<List<Response>> matchAll(dynamic /*Request|String*/ request,
-      [CacheOptions options]);
+      [CacheOptions? options]);
 
   /// Returns a Promise that resolves to a new Cache entry whose key
   /// is the request.
@@ -86,10 +86,11 @@ abstract class Cache {
   /// Cache entry and returns a Promise that resolves to true. If no Cache
   /// entry is found, it returns false.
   external Promise<bool> delete(dynamic /*Request|String*/ request,
-      [CacheOptions options]);
+      [CacheOptions? options]);
 
   /// Returns a Promise that resolves to an array of Cache keys.
-  external Promise<List<Request>> keys([Request request, CacheOptions options]);
+  external Promise<List<Request>> keys(
+      [Request? request, CacheOptions? options]);
 }
 
 /// Represents the storage for Cache objects. It provides a master directory of
@@ -102,7 +103,7 @@ abstract class CacheStorage {
   /// CacheStorage object tracks and returns a Promise that resolves
   /// to that match.
   external Promise<Response> match(dynamic /*Request|String*/ request,
-      [CacheOptions options]);
+      [CacheOptions? options]);
 
   /// Returns a Promise that resolves to true if a Cache object matching
   /// the cacheName exists.
@@ -173,7 +174,7 @@ abstract class ServiceWorkerClientsMatchOptions {
   external String get type;
   external set type(String v);
   external factory ServiceWorkerClientsMatchOptions(
-      {bool includeUncontrolled, String type});
+      {bool? includeUncontrolled, String? type});
 }
 
 /// Represents a container for a list of Client objects; the main way to access
@@ -191,7 +192,7 @@ abstract class ServiceWorkerClients {
   /// are not included, the method returns only the service worker clients
   /// controlled by the service worker.
   external Promise<List<ServiceWorkerClient>> matchAll(
-      [ServiceWorkerClientsMatchOptions options]);
+      [ServiceWorkerClientsMatchOptions? options]);
 
   /// Opens a service worker Client in a new browser window.
   /// in the window.
@@ -272,7 +273,7 @@ abstract class PushSubscriptionOptions {
   external Uint8List get applicationServerKey;
   external set applicationServerKey(Uint8List v);
   external factory PushSubscriptionOptions(
-      {bool userVisibleOnly, Uint8List applicationServerKey});
+      {bool? userVisibleOnly, Uint8List? applicationServerKey});
 }
 
 /// The PushManager interface provides a way to receive notifications from
@@ -285,7 +286,7 @@ abstract class PushManager {
   /// Returns a promise that resolves to a PushSubscription with details of a
   /// new push subscription.
   external Promise<PushSubscription> subscribe(
-      [PushSubscriptionOptions options]);
+      [PushSubscriptionOptions? options]);
 
   /// Returns a promise that resolves to a PushSubscription details of
   /// the retrieved push subscription.
@@ -478,20 +479,20 @@ abstract class Notification {
   external List<int> get vibrate;
 
   external factory Notification({
-    List actions,
-    String badge,
-    String body,
+    List? actions,
+    String? badge,
+    String? body,
     dynamic data,
-    String dir,
-    String lang,
-    String tag,
-    String icon,
-    String image,
-    bool requireInteraction,
-    bool silent,
-    DateTime timestamp,
-    String title,
-    List<int> vibrate,
+    String? dir,
+    String? lang,
+    String? tag,
+    String? icon,
+    String? image,
+    bool? requireInteraction,
+    bool? silent,
+    DateTime? timestamp,
+    String? title,
+    List<int>? vibrate,
   });
 
   /// Close a previously displayed notification.
@@ -568,17 +569,17 @@ class ShowNotificationOptions {
   external set data(dynamic v);
 
   external factory ShowNotificationOptions({
-    List<ShowNotificationAction> actions,
-    String badge,
-    String body,
-    String dir,
-    String icon,
-    String image,
-    String lang,
-    bool renotify,
-    bool requireInteraction,
-    String tag,
-    List<int> vibrate,
+    List<ShowNotificationAction>? actions,
+    String? badge,
+    String? body,
+    String? dir,
+    String? icon,
+    String? image,
+    String? lang,
+    bool? renotify,
+    bool? requireInteraction,
+    String? tag,
+    List<int>? vibrate,
     dynamic data,
   });
 }
@@ -599,7 +600,7 @@ class ShowNotificationAction {
   external set icon(String v);
 
   external factory ShowNotificationAction(
-      {String action, String title, String icon});
+      {String? action, String? title, String? icon});
 }
 
 /// The PushEvent interface of the Push API represents
@@ -677,7 +678,7 @@ abstract class ServiceWorkerRegisterOptions {
   /// The default value is the URL you'd get if you resolved './' using the web
   /// page's location as the base. It is not, as is commonly believed, relative
   /// to the service worker's location.
-  external factory ServiceWorkerRegisterOptions({String scope});
+  external factory ServiceWorkerRegisterOptions({String? scope});
 }
 
 /// Provides an object representing the service worker as an overall unit in the
@@ -723,21 +724,21 @@ abstract class ServiceWorkerContainer {
   /// service worker can control. This is usually a relative URL, and it
   /// defaults to '/' when not specified.
   external Promise<ServiceWorkerRegistration> register(String scriptURL,
-      [ServiceWorkerRegisterOptions options]);
+      [ServiceWorkerRegisterOptions? options]);
 
   /// Gets a ServiceWorkerRegistration object whose scope URL matches the
   /// provided document URL.  If the method can't return a
   /// ServiceWorkerRegistration, it returns a Promise.
   /// scope URL of the registration object you want to return. This is usually
   /// a relative URL.
-  external Promise<ServiceWorkerRegistration> getRegistration([String scope]);
+  external Promise<ServiceWorkerRegistration> getRegistration([String? scope]);
 
   /// Returns all ServiceWorkerRegistrations associated with a
   /// ServiceWorkerContainer in an array.  If the method can't return
   /// ServiceWorkerRegistrations, it returns a Promise.
   external Promise<List<ServiceWorkerRegistration>> getRegistrations();
   external void addEventListener(String type, listener(dynamic event),
-      [bool useCapture]);
+      [bool? useCapture]);
 }
 
 @anonymous
@@ -806,16 +807,16 @@ abstract class ServiceWorkerGlobalScope {
   /// to active state while service worker clients are using it.
   external Promise<Null> skipWaiting();
   external void addEventListener(String type, listener(dynamic event),
-      [bool useCapture]);
+      [bool? useCapture]);
 }
 
 // Masked type: ServiceWorkerGlobalScope
 @JS('self')
-external dynamic get globalScopeSelf;
+external Object get globalScopeSelf;
 
 // Masked type: ServiceWorkerContainer
 @JS('window.navigator.serviceWorker')
-external dynamic get navigatorContainer;
+external Object? get navigatorContainer;
 
 @JS('JSON.stringify')
 external String jsonStringify(Object obj);

@@ -172,16 +172,16 @@ abstract class RequestInit {
   external dynamic get window;
   external set window(dynamic v);
   external factory RequestInit(
-      {String method,
+      {String? method,
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ headers,
       dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ body,
-      String referrer,
-      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ referrerPolicy,
-      String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ mode,
-      String /*'omit'|'same-origin'|'include'*/ credentials,
-      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ cache,
-      String /*'follow'|'error'|'manual'*/ redirect,
-      String integrity,
+      String? referrer,
+      String? /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ referrerPolicy,
+      String? /*'navigate'|'same-origin'|'no-cors'|'cors'*/ mode,
+      String? /*'omit'|'same-origin'|'include'*/ credentials,
+      String? /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ cache,
+      String? /*'follow'|'error'|'manual'*/ redirect,
+      String? integrity,
       dynamic window});
 }
 
@@ -189,7 +189,7 @@ abstract class RequestInit {
 @JS()
 class Request extends Body implements RequestInterface {
   external factory Request(dynamic /*RequestInterface|String*/ input,
-      [RequestInit init]);
+      [RequestInit? init]);
   external String get method;
   external set method(String v);
   external String get url;
@@ -261,8 +261,8 @@ abstract class ResponseInit {
   external set headers(
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ v);
   external factory ResponseInit(
-      {num status,
-      String statusText,
+      {num? status,
+      String? statusText,
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ headers});
 }
 
@@ -270,8 +270,8 @@ abstract class ResponseInit {
 class Response extends Body implements ResponseInterface {
   external factory Response(
       [dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ body,
-      ResponseInit init]);
-  external static ResponseInterface redirect(String url, [num status]);
+      ResponseInit? init]);
+  external static ResponseInterface redirect(String url, [num? status]);
   external static ResponseInterface error();
   external String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/ get type;
   external set type(

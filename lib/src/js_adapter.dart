@@ -9,7 +9,7 @@ import 'package:js/js_util.dart' as js_util;
 import 'js_facade/promise.dart';
 
 Stream<T> callbackToStream<J, T>(
-    dynamic object, String name, T unwrapValue(J jsValue)) {
+    Object object, String name, T unwrapValue(J jsValue)) {
   // ignore: close_sinks
   StreamController<T> controller = new StreamController.broadcast(sync: true);
   js_util.setProperty(object, name, allowInterop((J event) {
@@ -19,11 +19,11 @@ Stream<T> callbackToStream<J, T>(
 }
 
 Future<T> promiseToFuture<J, T>(Promise<J> promise,
-    [T unwrapValue(J jsValue)]) {
+    [T unwrapValue(J jsValue)?]) {
   // TODO: handle if promise object is already a future.
   Completer<T> completer = new Completer();
   promise.then(allowInterop((value) {
-    T unwrapped;
+    T? unwrapped;
     if (unwrapValue == null) {
       unwrapped = value as T;
     } else if (value != null) {
@@ -31,12 +31,12 @@ Future<T> promiseToFuture<J, T>(Promise<J> promise,
     }
     completer.complete(unwrapped);
   }), allowInterop((error) {
-    completer.completeError(error);
+    completer.completeError(error as Object);
   }));
   return completer.future;
 }
 
-Promise<J> futureToPromise<T, J>(Future<T> future, [J wrapValue(T value)]) {
+Promise<J> futureToPromise<T, J>(Future<T> future, [J wrapValue(T value)?]) {
   return new Promise<J>(
     allowInterop(
       (void resolveFn(J value), void rejectFn(error)) {
@@ -57,21 +57,21 @@ Promise<J> futureToPromise<T, J>(Future<T> future, [J wrapValue(T value)]) {
 }
 
 Iterable<T> iteratorToIterable<T>(Function iteratorGetter) =>
-    new _Iterable(iteratorGetter);
+    new _Iterable<T>(iteratorGetter);
 
 class _Iterator<R> implements Iterator<R> {
-  final dynamic _object;
-  R _current;
+  final Object _object;
+  R? _current;
   _Iterator(this._object);
 
   @override
-  R get current => _current;
+  R get current => _current!;
 
   @override
   bool moveNext() {
-    dynamic m = js_util.callMethod(_object, 'next', []);
+    var m = js_util.callMethod(_object, 'next', []) as Object;
     bool hasValue = js_util.getProperty(m, 'done') == false;
-    _current = hasValue ? js_util.getProperty(m, 'value') as R : null;
+    _current = hasValue ? js_util.getProperty(m, 'value') as R? : null;
     return hasValue;
   }
 }
@@ -81,5 +81,5 @@ class _Iterable<R> extends IterableMixin<R> {
   _Iterable(this._getter);
 
   @override
-  Iterator<R> get iterator => new _Iterator(_getter());
+  Iterator<R> get iterator => new _Iterator(_getter() as Object);
 }

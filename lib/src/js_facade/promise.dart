@@ -17,6 +17,6 @@ class Promise<T> extends Thenable<T> {
 @JS('Thenable')
 abstract class Thenable<T> {
   // ignore: non_constant_identifier_names
-  external Thenable JS$catch([RejectFn rejectFn]);
-  external Thenable then([ResolveFn<T> resolveFn, RejectFn rejectFn]);
+  external Thenable JS$catch([RejectFn? rejectFn]);
+  external Thenable then([ResolveFn<T>? resolveFn, RejectFn? rejectFn]);
 }

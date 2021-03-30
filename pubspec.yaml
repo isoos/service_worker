@@ -1,11 +1,11 @@
 name: service_worker
-version: 0.2.4
+version: 0.3.0-nullsafety.1
 description: JavaScript bindings for the Service Worker API.
 
 homepage: https://github.com/isoos/service_worker
 
 environment:
-  sdk: ">=2.0.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   js: ^0.6.1

@@ -11,8 +11,8 @@ import 'package:js/js.dart';
 @JS()
 abstract class Thenable<T> {
   external Thenable<U> then<U>(
-      [Thenable<U> onFulfilled(T value),
-      Function /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
+      [Thenable<U> onFulfilled(T value)?,
+      Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
 }
 
 @JS()
@@ -27,7 +27,7 @@ class Promise<T> implements Thenable<T> {
   /// Any errors thrown in the constructor callback will be implicitly passed to reject().
   external factory Promise(
       void callback(
-          void resolve([Thenable<T> value]), void reject([dynamic error])));
+          void resolve([Thenable<T>? value]), void reject([dynamic error])));
 
   /// onFulfilled is called when/if 'promise' resolves. onRejected is called when/if 'promise' rejects.
   /// Both are optional, if either/both are omitted the next onFulfilled/onRejected in the chain is called.
@@ -38,11 +38,11 @@ class Promise<T> implements Thenable<T> {
   /*external Promise<U> then<U>([U|Thenable<U> onFulfilled(T value), void onRejected(dynamic error)]);*/
   @override
   external Promise<U> then<U>(
-      [Thenable<U> onFulfilled(T value),
-      Function /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
+      [Thenable<U> onFulfilled(T value)?,
+      Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
 
   /// Sugar for promise.then(undefined, onRejected)
-  external Promise<U> JS$catch<U>([Thenable<U> onRejected(dynamic error)]);
+  external Promise<U> JS$catch<U>([Thenable<U> onRejected(dynamic error)?]);
 }
 
 // Module Promise

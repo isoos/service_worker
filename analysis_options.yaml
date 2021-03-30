@@ -101,3 +101,5 @@ linter:
     - use_string_buffers
     - use_to_and_as_if_applicable
     - valid_regexps
+    # added during null_safety migration
+    - prefer_typing_uninitialized_variables

@@ -48,3 +48,17 @@ void main(List<String> args) {
   });
 }
 ````
+
+## Temp Null safety support
+
+Git version, only tested registration in web app client so cannot decently propose an untested PR.
+
+For now, in your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  service_worker:
+    git:
+      url: git://github.com/tekartikdev/service_worker
+      ref: null_safety
+```

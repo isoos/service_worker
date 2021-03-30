@@ -61,19 +61,19 @@ Stream<PushEvent> get onPushSubscriptionChange =>
 
 /// Allows the current service worker registration to progress from waiting
 /// to active state while service worker clients are using it.
-Future<Null> skipWaiting() => _self.skipWaiting();
+Future<void> skipWaiting() => _self.skipWaiting();
 
 /// Attach an event listener.
-void addEventListener<K>(String type, listener(K event), [bool useCapture]) =>
+void addEventListener<K>(String type, listener(K event), [bool? useCapture]) =>
     _self.addEventListener(type, listener, useCapture);
 
 /// Fetches the [request] and returns the [Response]
 Future<Response> fetch(dynamic /*Request|String*/ request,
-        [RequestInit requestInit]) =>
+        [RequestInit? requestInit]) =>
     _self.fetch(request, requestInit);
 
 /// Returns the indexedDB in the current scope.
-IdbFactory get indexedDB => _self.indexedDB;
+IdbFactory? get indexedDB => _self.indexedDB;
 
 // Returns the location object of the worker.
 WorkerLocation get location => _self.location;

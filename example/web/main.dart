@@ -6,7 +6,7 @@ import 'package:service_worker/window.dart' as sw;
 void _log(Object o) => print('  MAIN: $o');
 
 Future main() async {
-  querySelector('#output').text =
+  querySelector('#output')!.text =
       'Your Dart app is running.\nOpen your Developer console to see details.';
 
   if (sw.isNotSupported) {
@@ -26,7 +26,7 @@ Future main() async {
 
   var message = 'Sample message: ${new DateTime.now()}';
   _log('Sending message: `$message`');
-  registration.active.postMessage(message);
+  registration.active!.postMessage(message);
   _log('Message sent: `$message`');
 
   try {
