@@ -59,6 +59,6 @@ For now, in your `pubspec.yaml`:
 dependencies:
   service_worker:
     git:
-      url: git://github.com/tekartikdev/service_worker
-      ref: null_safety
+      url: https://github.com/tekartikdev/service_worker
+      ref: dart2_3
 ```
