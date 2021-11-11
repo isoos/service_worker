@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:indexed_db';
 
 import 'src/service_worker_api.dart';
+
 export 'src/service_worker_api.dart' hide ServiceWorkerContainer;
 
 ServiceWorkerGlobalScope _self = ServiceWorkerGlobalScope.globalScope;
@@ -64,7 +65,8 @@ Stream<PushEvent> get onPushSubscriptionChange =>
 Future<void> skipWaiting() => _self.skipWaiting();
 
 /// Attach an event listener.
-void addEventListener<K>(String type, listener(K event), [bool? useCapture]) =>
+void addEventListener<K>(String type, Function(K event) listener,
+        [bool? useCapture]) =>
     _self.addEventListener(type, listener, useCapture);
 
 /// Fetches the [request] and returns the [Response]

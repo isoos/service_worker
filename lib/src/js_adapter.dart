@@ -9,9 +9,9 @@ import 'package:js/js_util.dart' as js_util;
 import 'js_facade/promise.dart';
 
 Stream<T> callbackToStream<J, T>(
-    Object object, String name, T unwrapValue(J jsValue)) {
+    Object object, String name, T Function(J jsValue) unwrapValue) {
   // ignore: close_sinks
-  StreamController<T> controller = new StreamController.broadcast(sync: true);
+  StreamController<T> controller = StreamController.broadcast(sync: true);
   js_util.setProperty(object, name, allowInterop((J event) {
     controller.add(unwrapValue(event));
   }));
@@ -19,7 +19,7 @@ Stream<T> callbackToStream<J, T>(
 }
 
 Future<T> promiseToFuture<J, T>(Promise<J> promise,
-    [T unwrapValue(J jsValue)?]) {
+    [T Function(J jsValue)? unwrapValue]) {
   // TODO: handle if promise object is already a future.
   var completer = Completer<T>();
   promise.then(allowInterop((value) {
@@ -36,10 +36,12 @@ Future<T> promiseToFuture<J, T>(Promise<J> promise,
   return completer.future;
 }
 
-Promise<J> futureToPromise<T, J>(Future<T> future, [J wrapValue(T value)?]) {
-  return new Promise<J>(
+Promise<J> futureToPromise<T, J>(Future<T> future,
+    [J Function(T value)? wrapValue]) {
+  return Promise<J>(
     allowInterop(
-      (void resolveFn(J value), void rejectFn(error)) {
+      (void Function(J value) resolveFn,
+          void Function(Object? error) rejectFn) {
         future.then((value) {
           dynamic wrapped;
           if (wrapValue != null) {
@@ -57,7 +59,7 @@ Promise<J> futureToPromise<T, J>(Future<T> future, [J wrapValue(T value)?]) {
 }
 
 Iterable<T> iteratorToIterable<T>(Function iteratorGetter) =>
-    new _Iterable<T>(iteratorGetter);
+    _Iterable<T>(iteratorGetter);
 
 class _Iterator<R> implements Iterator<R> {
   final Object _object;
@@ -81,5 +83,5 @@ class _Iterable<R> extends IterableMixin<R> {
   _Iterable(this._getter);
 
   @override
-  Iterator<R> get iterator => new _Iterator(_getter() as Object);
+  Iterator<R> get iterator => _Iterator(_getter() as Object);
 }

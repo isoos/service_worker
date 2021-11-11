@@ -11,7 +11,7 @@ import 'package:js/js.dart';
 @JS()
 abstract class Thenable<T> {
   external Thenable<U> then<U>(
-      [Thenable<U> onFulfilled(T value)?,
+      [Thenable<U> Function(T value)? onFulfilled,
       Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
 }
 
@@ -26,8 +26,9 @@ class Promise<T> implements Thenable<T> {
   /// For consistency and debugging (eg stack traces), obj should be an instanceof Error.
   /// Any errors thrown in the constructor callback will be implicitly passed to reject().
   external factory Promise(
-      void callback(
-          void resolve([Thenable<T>? value]), void reject([dynamic error])));
+      void Function(void Function([Thenable<T>? value]) resolve,
+              void Function([dynamic error]) reject)
+          callback);
 
   /// onFulfilled is called when/if 'promise' resolves. onRejected is called when/if 'promise' rejects.
   /// Both are optional, if either/both are omitted the next onFulfilled/onRejected in the chain is called.
@@ -38,11 +39,13 @@ class Promise<T> implements Thenable<T> {
   /*external Promise<U> then<U>([U|Thenable<U> onFulfilled(T value), void onRejected(dynamic error)]);*/
   @override
   external Promise<U> then<U>(
-      [Thenable<U> onFulfilled(T value)?,
+      [Thenable<U> Function(T value)? onFulfilled,
       Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
 
   /// Sugar for promise.then(undefined, onRejected)
-  external Promise<U> JS$catch<U>([Thenable<U> onRejected(dynamic error)?]);
+  // ignore: non_constant_identifier_names
+  external Promise<U> JS$catch<U>(
+      [Thenable<U> Function(dynamic error)? onRejected]);
 }
 
 // Module Promise
@@ -73,8 +76,10 @@ external dynamic get foo;
 external set foo(dynamic v);
 // Module rsvp
 @JS('es6-promise.rsvp.Promise')
+// ignore: non_constant_identifier_names
 external dynamic get rsvp_Promise;
 @JS('es6-promise.rsvp.Promise')
+// ignore: non_constant_identifier_names
 external set rsvp_Promise(dynamic v);
 @JS('es6-promise.rsvp.polyfill')
 external void polyfill();

@@ -3,6 +3,7 @@ library service_worker.window;
 import 'dart:async';
 
 import 'src/service_worker_api.dart';
+
 export 'src/service_worker_api.dart'
     show
         ErrorEvent,
@@ -23,7 +24,7 @@ ServiceWorkerContainer? get _self => ServiceWorkerContainer.navigatorContainer;
 
 /// API entry point for web apps (window.navigator.serviceWorker).
 /// Deprecated, use top-level fields and methods instead.
-@deprecated
+@Deprecated('Use top-level fields and methods instead.')
 ServiceWorkerContainer? get serviceWorker => _self;
 
 /// Whether ServiceWorker is supported in the current browser.
@@ -81,5 +82,6 @@ Future<List<ServiceWorkerRegistration>> getRegistrations() =>
     _self!.getRegistrations();
 
 /// Attach an event listener.
-void addEventListener<K>(String type, listener(K event), [bool? useCapture]) =>
+void addEventListener<K>(String type, Function(K event) listener,
+        [bool? useCapture]) =>
     _self!.addEventListener(type, listener, useCapture);

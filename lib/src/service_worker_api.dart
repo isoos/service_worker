@@ -49,11 +49,11 @@ export 'js_facade/service_worker_api.dart'
 class ServiceWorkerGlobalScope {
   /// API entry point for ServiceWorkers.
   static final ServiceWorkerGlobalScope globalScope =
-      new ServiceWorkerGlobalScope._(facade.globalScopeSelf);
+      ServiceWorkerGlobalScope._(facade.globalScopeSelf);
 
   /// As ServiceWorkerGlobalScope has an instance-level self defined, this
   /// static value will be removed in the next release.
-  @deprecated
+  @Deprecated('Removed in next release')
   static final ServiceWorkerGlobalScope self = globalScope;
 
   // Masked type: facade.ServiceWorkerGlobalScope
@@ -74,34 +74,34 @@ class ServiceWorkerGlobalScope {
 
   /// Contains the CacheStorage object associated with the service worker.
   CacheStorage get caches =>
-      _caches ??= new CacheStorage._(_getProperty(_delegate, 'caches'));
+      _caches ??= CacheStorage._(_getProperty(_delegate, 'caches'));
 
   /// Contains the Clients object associated with the service worker.
-  ServiceWorkerClients get clients => _clients ??=
-      new ServiceWorkerClients._(_getProperty(_delegate, 'clients'));
+  ServiceWorkerClients get clients =>
+      _clients ??= ServiceWorkerClients._(_getProperty(_delegate, 'clients'));
 
   /// Contains the ServiceWorkerRegistration object that represents the
   /// service worker's registration.
   ServiceWorkerRegistration get registration =>
       _registration ??
-      new ServiceWorkerRegistration._(_getProperty(_delegate, 'registration'));
+      ServiceWorkerRegistration._(_getProperty(_delegate, 'registration'));
 
   /// An event handler fired whenever an activate event occurs — when a
   /// ServiceWorkerRegistration acquires a new ServiceWorkerRegistration.active
   /// worker.
   Stream<ExtendableEvent> get onActivate => _onActivate ??= callbackToStream(
-      _delegate, 'onactivate', (Object j) => new ExtendableEvent._(j));
+      _delegate, 'onactivate', (Object j) => ExtendableEvent._(j));
 
   /// An event handler fired whenever a fetch event occurs — when a fetch()
   /// is called.
   Stream<FetchEvent> get onFetch => _onFetch ??=
-      callbackToStream(_delegate, 'onfetch', (Object j) => new FetchEvent._(j));
+      callbackToStream(_delegate, 'onfetch', (Object j) => FetchEvent._(j));
 
   /// An event handler fired whenever an install event occurs — when a
   /// ServiceWorkerRegistration acquires a new
   /// ServiceWorkerRegistration.installing worker.
-  Stream<InstallEvent> get onInstall => _onInstall ??= callbackToStream(
-      _delegate, 'oninstall', (Object j) => new InstallEvent._(j));
+  Stream<InstallEvent> get onInstall => _onInstall ??=
+      callbackToStream(_delegate, 'oninstall', (Object j) => InstallEvent._(j));
 
   /// An event handler fired whenever a message event occurs — when incoming
   /// messages are received. Controlled pages can use the
@@ -114,27 +114,27 @@ class ServiceWorkerGlobalScope {
   /// make sure it's compatible with `window.onmessage`
   /// onmessage: (messageevent: ExtendableMessageEvent) => void;
   Stream<ExtendableMessageEvent> get onMessage =>
-      _onMessage ??= callbackToStream(_delegate, 'onmessage',
-          (Object j) => new ExtendableMessageEvent._(j));
+      _onMessage ??= callbackToStream(
+          _delegate, 'onmessage', (Object j) => ExtendableMessageEvent._(j));
 
   /// An event handler fired whenever a notificationclick event occurs — when
   /// a user clicks on a displayed notification.
   Stream<NotificationEvent> get onNotificationClick =>
       _onNotificationClick ??= callbackToStream(_delegate,
-          'onnotificationclick', (Object j) => new NotificationEvent._(j));
+          'onnotificationclick', (Object j) => NotificationEvent._(j));
 
   /// An event handler fired whenever a push event occurs — when a server
   /// push notification is received.
   Stream<PushEvent> get onPush =>
       _onPush ??= callbackToStream<Object, PushEvent>(
-          _delegate, 'onpush', (Object j) => new PushEvent._(j));
+          _delegate, 'onpush', (Object j) => PushEvent._(j));
 
   /// An event handler fired whenever a pushsubscriptionchange event occurs —
   /// when a push subscription has been invalidated, or is about to be
   /// invalidated (e.g. when a push service sets an expiration time).
   Stream<PushEvent> get onPushSubscriptionChange =>
-      _onPushSubscriptionChange ??= callbackToStream(_delegate,
-          'onpushsubscriptionchange', (Object j) => new PushEvent._(j));
+      _onPushSubscriptionChange ??= callbackToStream(
+          _delegate, 'onpushsubscriptionchange', (Object j) => PushEvent._(j));
 
   /// Allows the current service worker registration to progress from waiting
   /// to active state while service worker clients are using it.
@@ -142,7 +142,7 @@ class ServiceWorkerGlobalScope {
       promiseToFuture(_callMethod(_delegate, 'skipWaiting', []));
 
   /// Attach an event listener.
-  void addEventListener<K>(String type, listener(K event),
+  void addEventListener<K>(String type, Function(K event) listener,
           [bool? useCapture]) =>
       _callMethod(_delegate, 'addEventListener',
           [type, allowInterop(listener), useCapture]);
@@ -155,7 +155,7 @@ class ServiceWorkerGlobalScope {
       args.add(requestInit);
     }
     return promiseToFuture<Object, Response>(
-        _callMethod(_delegate, 'fetch', args), (Object j) => new Response._(j));
+        _callMethod(_delegate, 'fetch', args), (Object j) => Response._(j));
   }
 
   /// Returns the indexedDB in the current scope.
@@ -163,7 +163,7 @@ class ServiceWorkerGlobalScope {
 
   // Returns the location object of the worker.
   WorkerLocation get location =>
-      _location ??= new WorkerLocation(_getProperty(_delegate, 'location'));
+      _location ??= WorkerLocation(_getProperty(_delegate, 'location'));
 }
 
 /// Provides an object representing the service worker as an overall unit in the
@@ -198,7 +198,7 @@ class ServiceWorkerContainer {
   Future<ServiceWorkerRegistration> get ready =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
           _getProperty(_delegate, 'ready'),
-          (Object j) => new ServiceWorkerRegistration._(j));
+          (Object j) => ServiceWorkerRegistration._(j));
 
   /// An event handler fired whenever a controllerchange event occurs — when
   /// the document's associated ServiceWorkerRegistration acquires a new
@@ -227,7 +227,7 @@ class ServiceWorkerContainer {
           [ServiceWorkerRegisterOptions? options]) =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
           _callMethod(_delegate, 'register', [scriptURL, options]),
-          (Object j) => new ServiceWorkerRegistration._(j));
+          (Object j) => ServiceWorkerRegistration._(j));
 
   /// Gets a ServiceWorkerRegistration object whose scope URL matches the
   /// provided document URL.  If the method can't return a
@@ -237,7 +237,7 @@ class ServiceWorkerContainer {
   Future<ServiceWorkerRegistration> getRegistration([String? scope]) =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
           _callMethod(_delegate, 'getRegistration', [scope]),
-          (Object j) => new ServiceWorkerRegistration._(j));
+          (Object j) => ServiceWorkerRegistration._(j));
 
   /// Returns all ServiceWorkerRegistrations associated with a
   /// ServiceWorkerContainer in an array.  If the method can't return
@@ -247,11 +247,12 @@ class ServiceWorkerContainer {
           _callMethod(_delegate, 'getRegistrations', []),
           (List list) => list
               .map<ServiceWorkerRegistration>(
-                  (j) => new ServiceWorkerRegistration._(j as Object))
+                  (j) => ServiceWorkerRegistration._(j as Object))
               .toList());
 
   /// Attach an event listener.
-  void addEventListener<K>(String type, listener(K event), [bool? useCapture]) {
+  void addEventListener<K>(String type, Function(K event) listener,
+      [bool? useCapture]) {
     _callMethod(_delegate, 'addEventListener',
         [type, allowInterop(listener), useCapture]);
   }
@@ -273,7 +274,7 @@ class CacheStorage {
       promiseToFuture<Object?, Response?>(
           _callMethod(_delegate, 'match',
               [_wrapRequest(request), if (options != null) options]),
-          (Object? j) => (j == null) ? null : new Response._(j));
+          (Object? j) => (j == null) ? null : Response._(j));
 
   /// Returns a Promise that resolves to true if a Cache object matching
   /// the cacheName exists.
@@ -284,8 +285,7 @@ class CacheStorage {
   /// Returns a Promise that resolves to the Cache object matching
   /// the cacheName.
   Future<Cache> open(String cacheName) => promiseToFuture<Object, Cache>(
-      _callMethod(_delegate, 'open', [cacheName]),
-      (Object j) => new Cache._(j));
+      _callMethod(_delegate, 'open', [cacheName]), (Object j) => Cache._(j));
 
   /// Finds the Cache object matching the cacheName, and if found, deletes the
   /// Cache object and returns a Promise that resolves to true. If no
@@ -299,7 +299,7 @@ class CacheStorage {
   /// Cache objects.
   Future<List<String>> keys() => promiseToFuture<List, List<String>>(
       _callMethod(_delegate, 'keys', []),
-      (List list) => new List<String>.from(list));
+      (List list) => List<String>.from(list));
 }
 
 /// Represents the storage for Request / Response object pairs that are cached as
@@ -329,17 +329,17 @@ class Cache {
 
   /// Returns a Promise that resolves to a new Cache entry whose key
   /// is the request.
-  Future<Null> add(dynamic /*Request|String*/ request) =>
+  Future<void> add(dynamic /*Request|String*/ request) =>
       promiseToFuture(_callMethod(_delegate, 'add', [_wrapRequest(request)]));
 
   /// Returns a Promise that resolves to a new array of Cache entries whose
   /// keys are the requests.
-  Future<Null> addAll(List<dynamic /*Request|String*/ > requests) =>
+  Future<void> addAll(List<dynamic /*Request|String*/ > requests) =>
       promiseToFuture(_callMethod(
           _delegate, 'addAll', [requests.map(_wrapRequest).toList()]));
 
   /// Adds additional key/value pairs to the current Cache object.
-  Future<Null> put(dynamic /*Request|String*/ request, Response response) {
+  Future<void> put(dynamic /*Request|String*/ request, Response response) {
     dynamic unwrapped = request is Request ? request._delegate : request;
     return promiseToFuture(
         _callMethod(_delegate, 'put', [unwrapped, response._delegate]));
@@ -380,7 +380,7 @@ class ServiceWorkerClients {
   Future<ServiceWorkerClient> operator [](String clientId) =>
       promiseToFuture<Object, ServiceWorkerClient>(
           _callMethod(_delegate, 'get', [clientId]),
-          (Object j) => new ServiceWorkerClient._(j));
+          (Object j) => ServiceWorkerClient._(j));
 
   /// Gets a list of service worker clients and returns them in a Promise.
   /// Include the options parameter to return all service worker clients whose
@@ -401,11 +401,11 @@ class ServiceWorkerClients {
   Future<WindowClient> openWindow(String url) =>
       promiseToFuture<Object, WindowClient>(
           _callMethod(_delegate, 'openWindow', [url]),
-          (Object j) => new WindowClient._(j));
+          (Object j) => WindowClient._(j));
 
   /// Allows an active Service Worker to set itself as the active worker for a
   /// client page when the worker and the page are in the same scope.
-  Future<Null> claim() => promiseToFuture(_callMethod(_delegate, 'claim', []));
+  Future<void> claim() => promiseToFuture(_callMethod(_delegate, 'claim', []));
 }
 
 /// Represents the scope of a service worker client. A service worker client is
@@ -440,7 +440,7 @@ class WindowClient extends ServiceWorkerClient {
   WindowClient._(Object delegate) : super._(delegate);
 
   /// Gives user input focus to the current client.
-  Future<Null> focus() => promiseToFuture(_callMethod(_delegate, 'focus', []));
+  Future<void> focus() => promiseToFuture(_callMethod(_delegate, 'focus', []));
 
   /// A boolean that indicates whether the current client has focus.
   bool? get focused => _getProperty(_delegate, 'focused');
@@ -490,8 +490,8 @@ class ServiceWorkerRegistration implements EventTarget {
   /// Returns an interface to for managing push subscriptions, including
   /// subscribing, getting an active subscription, and accessing push
   /// permission status.
-  PushManager get pushManager => _pushManager ??=
-      new PushManager._(_getProperty(_delegate, 'pushManager'));
+  PushManager get pushManager =>
+      _pushManager ??= PushManager._(_getProperty(_delegate, 'pushManager'));
 
   /// An EventListener property called whenever an event of type updatefound
   /// is fired; it is fired any time the ServiceWorkerRegistration.installing
@@ -503,7 +503,7 @@ class ServiceWorkerRegistration implements EventTarget {
   Future<ServiceWorkerRegistration> update() =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
           _callMethod(_delegate, 'update', []),
-          (Object j) => new ServiceWorkerRegistration._(j));
+          (Object j) => ServiceWorkerRegistration._(j));
 
   /// Unregisters the service worker registration and returns a promise
   /// (see Promise). The service worker will finish any ongoing operations
@@ -528,7 +528,7 @@ class ServiceWorkerRegistration implements EventTarget {
   @override
   void removeEventListener(String type, EventListener? listener,
           [bool? useCapture]) =>
-      throw new UnimplementedError();
+      throw UnimplementedError();
 
   /// Creates a notification on an active service worker.
   Future<NotificationEvent> showNotification(String title,
@@ -537,7 +537,7 @@ class ServiceWorkerRegistration implements EventTarget {
     if (options != null) args.add(options);
     return promiseToFuture<Object, NotificationEvent>(
         _callMethod(_delegate, 'showNotification', args),
-        (Object j) => new NotificationEvent._(j));
+        (Object j) => NotificationEvent._(j));
   }
 }
 
@@ -555,14 +555,14 @@ class PushManager {
   Future<PushSubscription> subscribe([PushSubscriptionOptions? options]) =>
       promiseToFuture<Object, PushSubscription>(
           _callMethod(_delegate, 'subscribe', [options]),
-          (Object j) => new PushSubscription._(j));
+          (Object j) => PushSubscription._(j));
 
   /// Returns a promise that resolves to a PushSubscription details of
   /// the retrieved push subscription.
   Future<PushSubscription> getSubscription() =>
       promiseToFuture<Object, PushSubscription>(
           _callMethod(_delegate, 'getSubscription', []),
-          (Object j) => new PushSubscription._(j));
+          (Object j) => PushSubscription._(j));
 
   /// Returns a promise that resolves to the PushPermissionStatus of the
   /// requesting webapp, which will be one of granted, denied, or default.
@@ -706,11 +706,11 @@ class FetchEvent implements Event {
 
   /// Returns the Request that triggered the event handler.
   Request get request =>
-      _request ??= new Request._(_getProperty(_delegate, 'request'));
+      _request ??= Request._(_getProperty(_delegate, 'request'));
 
   /// Returns the Client that the current service worker is controlling.
   ServiceWorkerClient get client =>
-      _client ??= new ServiceWorkerClient._(_getProperty(_delegate, 'client'));
+      _client ??= ServiceWorkerClient._(_getProperty(_delegate, 'client'));
 
   /// Returns the id of the client that the current service worker is controlling.
   String? get clientId => _getProperty(_delegate, 'clientId');
@@ -798,7 +798,7 @@ class ServiceWorker implements Worker {
 
   static ServiceWorker? _fromDelegate(Object? delegate) {
     if (delegate == null) return null;
-    return new ServiceWorker._(delegate);
+    return ServiceWorker._(delegate);
   }
 
   /// Returns the ServiceWorker serialized script URL defined as part of
@@ -854,7 +854,7 @@ class ServiceWorker implements Worker {
   @override
   void removeEventListener(String type, EventListener? listener,
           [bool? useCapture]) =>
-      throw new UnimplementedError();
+      throw UnimplementedError();
 
   @override
   void terminate() {
@@ -881,7 +881,7 @@ class ExtendableMessageEvent extends ExtendableEvent {
 
   /// Returns a reference to the service worker that sent the message.
   ServiceWorkerClient get source =>
-      new ServiceWorkerClient._(_getProperty(_delegate, 'source'));
+      ServiceWorkerClient._(_getProperty(_delegate, 'source'));
 
   /// Returns the array containing the MessagePort objects
   /// representing the ports of the associated message channel.
@@ -918,7 +918,7 @@ class PushEvent extends ExtendableEvent {
   /// Returns a reference to a PushMessageData object containing
   /// data sent to the PushSubscription.
   PushMessageData get data =>
-      new PushMessageData._(_getProperty(_delegate, 'data'));
+      PushMessageData._(_getProperty(_delegate, 'data'));
 }
 
 /// The PushMessageData interface of the Push API provides
@@ -976,7 +976,7 @@ class Request extends Body {
   String? get url => _getProperty(_delegate, 'url');
 
   Headers get headers =>
-      _headers ??= new Headers._(_getProperty(_delegate, 'headers'));
+      _headers ??= Headers._(_getProperty(_delegate, 'headers'));
 
   /// ''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'
   String? get type => _getProperty(_delegate, 'type');
@@ -1003,14 +1003,14 @@ class Request extends Body {
 
   String? get integrity => _getProperty(_delegate, 'integrity');
 
-  Request clone() => new Request._(_callMethod(_delegate, 'clone', []));
+  Request clone() => Request._(_callMethod(_delegate, 'clone', []));
 
   /// Creates a new [Request] instance with the same content and headers,
   /// appending the specified values from [headers] Map.
   Future<Request> cloneWith({Map<String, String>? headers}) async {
-    return new Request._(new facade.Request(
+    return Request._(facade.Request(
       clone()._delegate,
-      new facade.RequestInit(
+      facade.RequestInit(
           headers: this.headers.clone(headers: headers)._delegate),
     ));
   }
@@ -1022,9 +1022,9 @@ class Response extends Body {
   Response._(Object delegate) : super._(delegate);
 
   factory Response.redirect(String url, [int? status]) =>
-      new Response._(facade.Response.redirect(url, status));
+      Response._(facade.Response.redirect(url, status));
 
-  factory Response.error() => new Response._(facade.Response.error());
+  factory Response.error() => Response._(facade.Response.error());
 
   /// 'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'
   String? get type => _getProperty(_delegate, 'type');
@@ -1040,19 +1040,19 @@ class Response extends Body {
   bool? get ok => _getProperty(_delegate, 'ok');
 
   Headers get headers =>
-      _headers ??= new Headers._(_getProperty(_delegate, 'headers'));
+      _headers ??= Headers._(_getProperty(_delegate, 'headers'));
 
   dynamic get body => _getProperty(_delegate, 'body');
 
-  Response clone() => new Response._(_callMethod(_delegate, 'clone', []));
+  Response clone() => Response._(_callMethod(_delegate, 'clone', []));
 
   /// Creates a new [Response] instance with the same content and headers,
   /// appending the specified values from [headers] Map.
   Future<Response> cloneWith({Map<String, String>? headers}) async {
     ByteBuffer buffer = await clone().arrayBuffer();
-    return new Response._(new facade.Response(
+    return Response._(facade.Response(
       buffer,
-      new facade.ResponseInit(
+      facade.ResponseInit(
           status: status,
           statusText: statusText,
           headers: this.headers.clone(headers: headers)._delegate),
@@ -1084,7 +1084,7 @@ class Headers {
   /// Create a new [Headers] instance that has the same header values, and on
   /// top of that, it appends the specified values from the [headers] Map.
   Headers clone({Map<String, String>? headers}) {
-    Headers h = new Headers._(new facade.Headers());
+    Headers h = Headers._(facade.Headers());
     for (String? key in keys()) {
       h[key] = this[key];
     }
@@ -1094,7 +1094,7 @@ class Headers {
 }
 
 class WorkerLocation {
-  Object _delegate;
+  final Object _delegate;
   WorkerLocation(this._delegate);
 
   String? get href => _getProperty(_delegate, 'href');

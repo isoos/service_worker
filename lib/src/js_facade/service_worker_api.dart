@@ -10,10 +10,11 @@ import 'isomorphic_fetch.dart';
 import 'promise.dart';
 
 export 'dart:html' show MessageEvent, ErrorEvent;
+
 export 'isomorphic_fetch.dart';
 export 'promise.dart';
 
-typedef void CallbackFn<T>(T value);
+typedef CallbackFn<T> = void Function(T value);
 
 /// Type definitions for service_worker_api 0.0
 /// Project: https://developer.mozilla.org/fr/docs/Web/API/ServiceWorker_API
@@ -73,14 +74,14 @@ abstract class Cache {
 
   /// Returns a Promise that resolves to a new Cache entry whose key
   /// is the request.
-  external Promise<Null> add(dynamic /*Request|String*/ request);
+  external Promise<void> add(dynamic /*Request|String*/ request);
 
   /// Returns a Promise that resolves to a new array of Cache entries whose
   /// keys are the requests.
-  external Promise<Null> addAll(List<dynamic /*Request|String*/ > requests);
+  external Promise<void> addAll(List<dynamic /*Request|String*/ > requests);
 
   /// Adds additional key/value pairs to the current Cache object.
-  external Promise<Null> put(Request request, Response response);
+  external Promise<void> put(Request request, Response response);
 
   /// Finds the Cache entry whose key is the request, and if found, deletes the
   /// Cache entry and returns a Promise that resolves to true. If no Cache
@@ -200,7 +201,7 @@ abstract class ServiceWorkerClients {
 
   /// Allows an active Service Worker to set itself as the active worker for a
   /// client page when the worker and the page are in the same scope.
-  external Promise<Null> claim();
+  external Promise<void> claim();
 }
 
 /// Represents a service worker. Multiple browsing contexts (e.g. pages, workers,
@@ -737,7 +738,7 @@ abstract class ServiceWorkerContainer {
   /// ServiceWorkerContainer in an array.  If the method can't return
   /// ServiceWorkerRegistrations, it returns a Promise.
   external Promise<List<ServiceWorkerRegistration>> getRegistrations();
-  external void addEventListener(String type, listener(dynamic event),
+  external void addEventListener(String type, Function(dynamic event) listener,
       [bool? useCapture]);
 }
 
@@ -805,8 +806,8 @@ abstract class ServiceWorkerGlobalScope {
 
   /// Allows the current service worker registration to progress from waiting
   /// to active state while service worker clients are using it.
-  external Promise<Null> skipWaiting();
-  external void addEventListener(String type, listener(dynamic event),
+  external Promise<void> skipWaiting();
+  external void addEventListener(String type, Function(dynamic event) listener,
       [bool? useCapture]);
 }
 
