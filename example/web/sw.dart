@@ -56,11 +56,10 @@ Future _initCache() async {
   _log('Init cache...');
   Cache cache = await caches.open('offline-v1');
   await cache.addAll([
-    '/',
+    '/index.html',
     '/main.dart',
     '/main.dart.js',
     '/styles.css',
-    '/packages/browser/dart.js',
   ]);
   _log('Cache initialized.');
 }

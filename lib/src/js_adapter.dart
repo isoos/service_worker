@@ -21,7 +21,7 @@ Stream<T> callbackToStream<J, T>(
 Future<T> promiseToFuture<J, T>(Promise<J> promise,
     [T unwrapValue(J jsValue)?]) {
   // TODO: handle if promise object is already a future.
-  Completer<T> completer = new Completer();
+  var completer = Completer<T>();
   promise.then(allowInterop((value) {
     T? unwrapped;
     if (unwrapValue == null) {

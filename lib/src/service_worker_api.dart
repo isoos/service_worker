@@ -21,7 +21,6 @@ import 'package:js/js_util.dart' as js_util;
 
 import 'js_adapter.dart';
 import 'js_facade/service_worker_api.dart' as facade;
-
 import 'js_facade/service_worker_api.dart'
     show
         CacheOptions,
@@ -271,8 +270,9 @@ class CacheStorage {
   /// to that match.
   Future<Response?> match(dynamic /*Request|String*/ request,
           [CacheOptions? options]) =>
-      promiseToFuture<Object, Response?>(
-          _callMethod(_delegate, 'match', [_wrapRequest(request), options]),
+      promiseToFuture<Object?, Response?>(
+          _callMethod(_delegate, 'match',
+              [_wrapRequest(request), if (options != null) options]),
           (Object? j) => (j == null) ? null : new Response._(j));
 
   /// Returns a Promise that resolves to true if a Cache object matching
@@ -311,11 +311,11 @@ class Cache {
 
   /// Returns a Promise that resolves to the response associated with the first
   /// matching request in the Cache object.
-  Future<Response> match(dynamic /*Request|String*/ request,
+  Future<Response?> match(dynamic /*Request|String*/ request,
           [CacheOptions? options]) =>
-      promiseToFuture<Object, Response>(
+      promiseToFuture<Object?, Response?>(
           _callMethod(_delegate, 'match', [_wrapRequest(request), options]),
-          (Object j) => new Response._(j));
+          (Object? j) => j == null ? null : Response._(j));
 
   /// Returns a Promise that resolves to an array of all matching responses in
   /// the Cache object.
@@ -500,7 +500,10 @@ class ServiceWorkerRegistration implements EventTarget {
       callbackToStream(_delegate, 'onupdatefound', (Object j) => null);
 
   /// Allows you to update a service worker.
-  void update() => _callMethod(_delegate, 'update', []);
+  Future<ServiceWorkerRegistration> update() =>
+      promiseToFuture<Object, ServiceWorkerRegistration>(
+          _callMethod(_delegate, 'update', []),
+          (Object j) => new ServiceWorkerRegistration._(j));
 
   /// Unregisters the service worker registration and returns a promise
   /// (see Promise). The service worker will finish any ongoing operations
