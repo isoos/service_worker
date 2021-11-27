@@ -48,3 +48,8 @@ void main(List<String> args) {
   });
 }
 ````
+
+## Limitation
+
+You need to force dart2js compilation for service worker to work during debug mode. See `build.yaml`
+in the example folder.
