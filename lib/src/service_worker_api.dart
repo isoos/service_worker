@@ -885,7 +885,8 @@ class ExtendableMessageEvent extends ExtendableEvent {
 
   /// Returns the array containing the MessagePort objects
   /// representing the ports of the associated message channel.
-  List<MessagePort>? get ports => _getProperty(_delegate, 'ports');
+  List<MessagePort>? get ports =>
+      _getProperty<List>(_delegate, 'ports').cast<MessagePort>();
 }
 
 /// The parameter passed into the onnotificationclick handler,
