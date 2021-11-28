@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      build_web_compilers:entrypoint:
+        # Special option for service worker
+        generate_for:
+          - web/**.dart
+        options:
+          # Force dart2js for service worker to work for now
+          compiler: dart2js

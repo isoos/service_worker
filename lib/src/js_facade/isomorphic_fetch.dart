@@ -54,14 +54,16 @@ import 'promise.dart';
 abstract class HeadersInterface {
   external void append(String name, String value);
   external void delete(String name);
+  // ignore: non_constant_identifier_names
   external String /*String|Null*/ JS$get(String name);
   external List<String> getAll(String name);
   external bool has(String name);
+  // ignore: non_constant_identifier_names
   external void JS$set(String name, String value);
 
   /// TODO: iterable<string, string>;
   external void forEach(
-      void callback(String value, num index, HeadersInterface headers),
+      void Function(String value, num index, HeadersInterface headers) callback,
       [dynamic thisArg]);
 }
 
@@ -70,14 +72,23 @@ abstract class HeadersInterface {
 class Headers implements HeadersInterface {
   external factory Headers(
       [dynamic /*Headers|List<String>|JSMap of <String,String>*/ init]);
+  @override
   external void append(String name, String value);
+  @override
   external void delete(String name);
+  @override
+  // ignore: non_constant_identifier_names
   external String /*String|Null*/ JS$get(String name);
+  @override
   external List<String> getAll(String name);
+  @override
   external bool has(String name);
+  @override
+  // ignore: non_constant_identifier_names
   external void JS$set(String name, String value);
+  @override
   external void forEach(
-      void callback(String value, num index, HeadersInterface headers),
+      void Function(String value, num index, HeadersInterface headers) callback,
       [dynamic thisArg]);
 }
 
@@ -95,12 +106,19 @@ abstract class BodyInterface {
 
 @JS()
 class Body implements BodyInterface {
+  @override
   external bool get bodyUsed;
+  @override
   external set bodyUsed(bool v);
+  @override
   external Promise<ByteBuffer> arrayBuffer();
+  @override
   external Promise<Blob> blob();
+  @override
   external Promise<FormData> formData();
+  @override
   external Promise<T> json<T>();
+  @override
   external Promise<String> text();
 }
 
@@ -172,16 +190,16 @@ abstract class RequestInit {
   external dynamic get window;
   external set window(dynamic v);
   external factory RequestInit(
-      {String method,
+      {String? method,
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ headers,
       dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ body,
-      String referrer,
-      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ referrerPolicy,
-      String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ mode,
-      String /*'omit'|'same-origin'|'include'*/ credentials,
-      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ cache,
-      String /*'follow'|'error'|'manual'*/ redirect,
-      String integrity,
+      String? referrer,
+      String? /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ referrerPolicy,
+      String? /*'navigate'|'same-origin'|'no-cors'|'cors'*/ mode,
+      String? /*'omit'|'same-origin'|'include'*/ credentials,
+      String? /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ cache,
+      String? /*'follow'|'error'|'manual'*/ redirect,
+      String? integrity,
       dynamic window});
 }
 
@@ -189,35 +207,60 @@ abstract class RequestInit {
 @JS()
 class Request extends Body implements RequestInterface {
   external factory Request(dynamic /*RequestInterface|String*/ input,
-      [RequestInit init]);
+      [RequestInit? init]);
+  @override
   external String get method;
+  @override
   external set method(String v);
+  @override
   external String get url;
+  @override
   external set url(String v);
+  @override
   external HeadersInterface get headers;
+  @override
   external set headers(HeadersInterface v);
+  @override
   external String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/ get type;
+  @override
   external set type(
       String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/ v);
+  @override
   external String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/ get destination;
+  @override
   external set destination(
       String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/ v);
+  @override
   external String get referrer;
+  @override
   external set referrer(String v);
+  @override
   external String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ get referrerPolicy;
+  @override
   external set referrerPolicy(
       String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ v);
+  @override
   external String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ get mode;
+  @override
   external set mode(String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ v);
+  @override
   external String /*'omit'|'same-origin'|'include'*/ get credentials;
+  @override
   external set credentials(String /*'omit'|'same-origin'|'include'*/ v);
+  @override
   external String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ get cache;
+  @override
   external set cache(
       String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ v);
+  @override
   external String /*'follow'|'error'|'manual'*/ get redirect;
+  @override
   external set redirect(String /*'follow'|'error'|'manual'*/ v);
+  @override
   external String get integrity;
+  @override
   external set integrity(String v);
+  @override
   external RequestInterface clone();
 }
 
@@ -261,8 +304,8 @@ abstract class ResponseInit {
   external set headers(
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ v);
   external factory ResponseInit(
-      {num status,
-      String statusText,
+      {num? status,
+      String? statusText,
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ headers});
 }
 
@@ -270,28 +313,47 @@ abstract class ResponseInit {
 class Response extends Body implements ResponseInterface {
   external factory Response(
       [dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ body,
-      ResponseInit init]);
-  external static ResponseInterface redirect(String url, [num status]);
+      ResponseInit? init]);
+  external static ResponseInterface redirect(String url, [num? status]);
   external static ResponseInterface error();
+  @override
   external String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/ get type;
+  @override
   external set type(
       String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/ v);
+  @override
   external String get url;
+  @override
   external set url(String v);
+  @override
   external bool get redirected;
+  @override
   external set redirected(bool v);
+  @override
   external num get status;
+  @override
   external set status(num v);
+  @override
   external String get statusText;
+  @override
   external set statusText(String v);
+  @override
   external bool get ok;
+  @override
   external set ok(bool v);
+  @override
   external HeadersInterface get headers;
+  @override
   external set headers(HeadersInterface v);
+  @override
   external dynamic get body;
+  @override
   external set body(dynamic v);
+  @override
   external Promise<HeadersInterface> get trailer;
+  @override
   external set trailer(Promise<HeadersInterface> v);
+  @override
   external ResponseInterface clone();
 }
 

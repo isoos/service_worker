@@ -1,6 +1,8 @@
 include: package:lints/recommended.yaml
 #   https://www.dartlang.org/guides/language/analysis-options
 analyzer:
+  exclude:
+    - build/**
   strong-mode:
     implicit-casts: false
 

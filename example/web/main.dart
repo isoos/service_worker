@@ -6,7 +6,7 @@ import 'package:service_worker/window.dart' as sw;
 void _log(Object o) => print('  MAIN: $o');
 
 Future main() async {
-  querySelector('#output').text =
+  querySelector('#output')!.text =
       'Your Dart app is running.\nOpen your Developer console to see details.';
 
   if (sw.isNotSupported) {
@@ -24,14 +24,14 @@ Future main() async {
     _log('reply received: ${event.data}');
   });
 
-  var message = 'Sample message: ${new DateTime.now()}';
+  var message = 'Sample message: ${DateTime.now()}';
   _log('Sending message: `$message`');
-  registration.active.postMessage(message);
+  registration.active!.postMessage(message);
   _log('Message sent: `$message`');
 
   try {
     var subs = await registration.pushManager
-        .subscribe(new sw.PushSubscriptionOptions(userVisibleOnly: true));
+        .subscribe(sw.PushSubscriptionOptions(userVisibleOnly: true));
     _log('endpoint: ${subs.endpoint}');
   } on DomException catch (_) {
     _log('Error: Adding push subscription failed.');
