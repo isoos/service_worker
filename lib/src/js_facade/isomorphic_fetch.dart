@@ -131,24 +131,31 @@ abstract class RequestInterface implements BodyInterface {
   external set url(String v);
   external HeadersInterface get headers;
   external set headers(HeadersInterface v);
-  external String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/ get type;
+  external String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/
+      get type;
   external set type(
       String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/ v);
-  external String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/ get destination;
+  external String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/
+      get destination;
   external set destination(
-      String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/ v);
+      String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/
+          v);
   external String get referrer;
   external set referrer(String v);
-  external String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ get referrerPolicy;
+  external String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/
+      get referrerPolicy;
   external set referrerPolicy(
-      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ v);
+      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/
+          v);
   external String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ get mode;
   external set mode(String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ v);
   external String /*'omit'|'same-origin'|'include'*/ get credentials;
   external set credentials(String /*'omit'|'same-origin'|'include'*/ v);
-  external String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ get cache;
+  external String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/
+      get cache;
   external set cache(
-      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ v);
+      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/
+          v);
   external String /*'follow'|'error'|'manual'*/ get redirect;
   external set redirect(String /*'follow'|'error'|'manual'*/ v);
   external String get integrity;
@@ -166,23 +173,28 @@ abstract class RequestInterface implements BodyInterface {
 abstract class RequestInit {
   external String get method;
   external set method(String v);
-  external dynamic /*Headers|List<String>|JSMap of <String,String>*/ get headers;
+  external dynamic /*Headers|List<String>|JSMap of <String,String>*/
+      get headers;
   external set headers(
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ v);
   external dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ get body;
   external set body(dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ v);
   external String get referrer;
   external set referrer(String v);
-  external String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ get referrerPolicy;
+  external String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/
+      get referrerPolicy;
   external set referrerPolicy(
-      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ v);
+      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/
+          v);
   external String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ get mode;
   external set mode(String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ v);
   external String /*'omit'|'same-origin'|'include'*/ get credentials;
   external set credentials(String /*'omit'|'same-origin'|'include'*/ v);
-  external String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ get cache;
+  external String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/
+      get cache;
   external set cache(
-      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ v);
+      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/
+          v);
   external String /*'follow'|'error'|'manual'*/ get redirect;
   external set redirect(String /*'follow'|'error'|'manual'*/ v);
   external String get integrity;
@@ -194,10 +206,12 @@ abstract class RequestInit {
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ headers,
       dynamic /*Blob|TypedData|ByteBuffer|FormData|String*/ body,
       String? referrer,
-      String? /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ referrerPolicy,
+      String? /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/
+          referrerPolicy,
       String? /*'navigate'|'same-origin'|'no-cors'|'cors'*/ mode,
       String? /*'omit'|'same-origin'|'include'*/ credentials,
-      String? /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ cache,
+      String? /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/
+          cache,
       String? /*'follow'|'error'|'manual'*/ redirect,
       String? integrity,
       dynamic window});
@@ -221,24 +235,29 @@ class Request extends Body implements RequestInterface {
   @override
   external set headers(HeadersInterface v);
   @override
-  external String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/ get type;
+  external String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/
+      get type;
   @override
   external set type(
       String /*''|'audio'|'font'|'image'|'script'|'style'|'track'|'video'*/ v);
   @override
-  external String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/ get destination;
+  external String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/
+      get destination;
   @override
   external set destination(
-      String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/ v);
+      String /*''|'document'|'embed'|'font'|'image'|'manifest'|'media'|'object'|'report'|'script'|'serviceworker'|'sharedworker'|'style'|'worker'|'xslt'*/
+          v);
   @override
   external String get referrer;
   @override
   external set referrer(String v);
   @override
-  external String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ get referrerPolicy;
+  external String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/
+      get referrerPolicy;
   @override
   external set referrerPolicy(
-      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/ v);
+      String /*''|'no-referrer'|'no-referrer-when-downgrade'|'same-origin'|'origin'|'strict-origin'|'origin-when-cross-origin'|'strict-origin-when-cross-origin'|'unsafe-url'*/
+          v);
   @override
   external String /*'navigate'|'same-origin'|'no-cors'|'cors'*/ get mode;
   @override
@@ -248,10 +267,12 @@ class Request extends Body implements RequestInterface {
   @override
   external set credentials(String /*'omit'|'same-origin'|'include'*/ v);
   @override
-  external String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ get cache;
+  external String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/
+      get cache;
   @override
   external set cache(
-      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/ v);
+      String /*'default'|'no-store'|'reload'|'no-cache'|'force-cache'|'only-if-cached'*/
+          v);
   @override
   external String /*'follow'|'error'|'manual'*/ get redirect;
   @override
@@ -267,7 +288,8 @@ class Request extends Body implements RequestInterface {
 @anonymous
 @JS()
 abstract class ResponseInterface implements BodyInterface {
-  external String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/ get type;
+  external String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/
+      get type;
   external set type(
       String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/ v);
   external String get url;
@@ -300,7 +322,8 @@ abstract class ResponseInit {
   external set status(num v);
   external String get statusText;
   external set statusText(String v);
-  external dynamic /*Headers|List<String>|JSMap of <String,String>*/ get headers;
+  external dynamic /*Headers|List<String>|JSMap of <String,String>*/
+      get headers;
   external set headers(
       dynamic /*Headers|List<String>|JSMap of <String,String>*/ v);
   external factory ResponseInit(
@@ -317,7 +340,8 @@ class Response extends Body implements ResponseInterface {
   external static ResponseInterface redirect(String url, [num? status]);
   external static ResponseInterface error();
   @override
-  external String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/ get type;
+  external String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/
+      get type;
   @override
   external set type(
       String /*'basic'|'cors'|'default'|'error'|'opaque'|'opaqueredirect'*/ v);

@@ -89,19 +89,19 @@ class ServiceWorkerGlobalScope {
   /// An event handler fired whenever an activate event occurs — when a
   /// ServiceWorkerRegistration acquires a new ServiceWorkerRegistration.active
   /// worker.
-  Stream<ExtendableEvent> get onActivate => _onActivate ??= callbackToStream(
-      _delegate, 'onactivate', (Object j) => ExtendableEvent._(j));
+  Stream<ExtendableEvent> get onActivate => _onActivate ??=
+      callbackToStream(_delegate, 'onactivate', ExtendableEvent._);
 
   /// An event handler fired whenever a fetch event occurs — when a fetch()
   /// is called.
-  Stream<FetchEvent> get onFetch => _onFetch ??=
-      callbackToStream(_delegate, 'onfetch', (Object j) => FetchEvent._(j));
+  Stream<FetchEvent> get onFetch =>
+      _onFetch ??= callbackToStream(_delegate, 'onfetch', FetchEvent._);
 
   /// An event handler fired whenever an install event occurs — when a
   /// ServiceWorkerRegistration acquires a new
   /// ServiceWorkerRegistration.installing worker.
-  Stream<InstallEvent> get onInstall => _onInstall ??=
-      callbackToStream(_delegate, 'oninstall', (Object j) => InstallEvent._(j));
+  Stream<InstallEvent> get onInstall =>
+      _onInstall ??= callbackToStream(_delegate, 'oninstall', InstallEvent._);
 
   /// An event handler fired whenever a message event occurs — when incoming
   /// messages are received. Controlled pages can use the
@@ -113,28 +113,25 @@ class ServiceWorkerGlobalScope {
   /// since we are merging the interface into `Window`, we should
   /// make sure it's compatible with `window.onmessage`
   /// onmessage: (messageevent: ExtendableMessageEvent) => void;
-  Stream<ExtendableMessageEvent> get onMessage =>
-      _onMessage ??= callbackToStream(
-          _delegate, 'onmessage', (Object j) => ExtendableMessageEvent._(j));
+  Stream<ExtendableMessageEvent> get onMessage => _onMessage ??=
+      callbackToStream(_delegate, 'onmessage', ExtendableMessageEvent._);
 
   /// An event handler fired whenever a notificationclick event occurs — when
   /// a user clicks on a displayed notification.
-  Stream<NotificationEvent> get onNotificationClick =>
-      _onNotificationClick ??= callbackToStream(_delegate,
-          'onnotificationclick', (Object j) => NotificationEvent._(j));
+  Stream<NotificationEvent> get onNotificationClick => _onNotificationClick ??=
+      callbackToStream(_delegate, 'onnotificationclick', NotificationEvent._);
 
   /// An event handler fired whenever a push event occurs — when a server
   /// push notification is received.
-  Stream<PushEvent> get onPush =>
-      _onPush ??= callbackToStream<Object, PushEvent>(
-          _delegate, 'onpush', (Object j) => PushEvent._(j));
+  Stream<PushEvent> get onPush => _onPush ??=
+      callbackToStream<Object, PushEvent>(_delegate, 'onpush', PushEvent._);
 
   /// An event handler fired whenever a pushsubscriptionchange event occurs —
   /// when a push subscription has been invalidated, or is about to be
   /// invalidated (e.g. when a push service sets an expiration time).
   Stream<PushEvent> get onPushSubscriptionChange =>
-      _onPushSubscriptionChange ??= callbackToStream(
-          _delegate, 'onpushsubscriptionchange', (Object j) => PushEvent._(j));
+      _onPushSubscriptionChange ??=
+          callbackToStream(_delegate, 'onpushsubscriptionchange', PushEvent._);
 
   /// Allows the current service worker registration to progress from waiting
   /// to active state while service worker clients are using it.
@@ -155,7 +152,7 @@ class ServiceWorkerGlobalScope {
       args.add(requestInit);
     }
     return promiseToFuture<Object, Response>(
-        _callMethod(_delegate, 'fetch', args), (Object j) => Response._(j));
+        _callMethod(_delegate, 'fetch', args), Response._);
   }
 
   /// Returns the indexedDB in the current scope.
@@ -197,8 +194,7 @@ class ServiceWorkerContainer {
   /// ServiceWorkerRegistration with an ServiceWorkerRegistration.active worker.
   Future<ServiceWorkerRegistration> get ready =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
-          _getProperty(_delegate, 'ready'),
-          (Object j) => ServiceWorkerRegistration._(j));
+          _getProperty(_delegate, 'ready'), ServiceWorkerRegistration._);
 
   /// An event handler fired whenever a controllerchange event occurs — when
   /// the document's associated ServiceWorkerRegistration acquires a new
@@ -227,7 +223,7 @@ class ServiceWorkerContainer {
           [ServiceWorkerRegisterOptions? options]) =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
           _callMethod(_delegate, 'register', [scriptURL, options]),
-          (Object j) => ServiceWorkerRegistration._(j));
+          ServiceWorkerRegistration._);
 
   /// Gets a ServiceWorkerRegistration object whose scope URL matches the
   /// provided document URL.  If the method can't return a
@@ -237,7 +233,7 @@ class ServiceWorkerContainer {
   Future<ServiceWorkerRegistration> getRegistration([String? scope]) =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
           _callMethod(_delegate, 'getRegistration', [scope]),
-          (Object j) => ServiceWorkerRegistration._(j));
+          ServiceWorkerRegistration._);
 
   /// Returns all ServiceWorkerRegistrations associated with a
   /// ServiceWorkerContainer in an array.  If the method can't return
@@ -285,7 +281,7 @@ class CacheStorage {
   /// Returns a Promise that resolves to the Cache object matching
   /// the cacheName.
   Future<Cache> open(String cacheName) => promiseToFuture<Object, Cache>(
-      _callMethod(_delegate, 'open', [cacheName]), (Object j) => Cache._(j));
+      _callMethod(_delegate, 'open', [cacheName]), Cache._);
 
   /// Finds the Cache object matching the cacheName, and if found, deletes the
   /// Cache object and returns a Promise that resolves to true. If no
@@ -298,8 +294,7 @@ class CacheStorage {
   /// CacheStorage. Use this method to iterate over a list of all the
   /// Cache objects.
   Future<List<String>> keys() => promiseToFuture<List, List<String>>(
-      _callMethod(_delegate, 'keys', []),
-      (List list) => List<String>.from(list));
+      _callMethod(_delegate, 'keys', []), List<String>.from);
 }
 
 /// Represents the storage for Request / Response object pairs that are cached as
@@ -379,8 +374,7 @@ class ServiceWorkerClients {
   /// Gets a service worker client matching a given id and returns it in a Promise.
   Future<ServiceWorkerClient> operator [](String clientId) =>
       promiseToFuture<Object, ServiceWorkerClient>(
-          _callMethod(_delegate, 'get', [clientId]),
-          (Object j) => ServiceWorkerClient._(j));
+          _callMethod(_delegate, 'get', [clientId]), ServiceWorkerClient._);
 
   /// Gets a list of service worker clients and returns them in a Promise.
   /// Include the options parameter to return all service worker clients whose
@@ -400,8 +394,7 @@ class ServiceWorkerClients {
   /// in the window.
   Future<WindowClient> openWindow(String url) =>
       promiseToFuture<Object, WindowClient>(
-          _callMethod(_delegate, 'openWindow', [url]),
-          (Object j) => WindowClient._(j));
+          _callMethod(_delegate, 'openWindow', [url]), WindowClient._);
 
   /// Allows an active Service Worker to set itself as the active worker for a
   /// client page when the worker and the page are in the same scope.
@@ -502,8 +495,7 @@ class ServiceWorkerRegistration implements EventTarget {
   /// Allows you to update a service worker.
   Future<ServiceWorkerRegistration> update() =>
       promiseToFuture<Object, ServiceWorkerRegistration>(
-          _callMethod(_delegate, 'update', []),
-          (Object j) => ServiceWorkerRegistration._(j));
+          _callMethod(_delegate, 'update', []), ServiceWorkerRegistration._);
 
   /// Unregisters the service worker registration and returns a promise
   /// (see Promise). The service worker will finish any ongoing operations
@@ -536,8 +528,7 @@ class ServiceWorkerRegistration implements EventTarget {
     List args = [title];
     if (options != null) args.add(options);
     return promiseToFuture<Object, NotificationEvent>(
-        _callMethod(_delegate, 'showNotification', args),
-        (Object j) => NotificationEvent._(j));
+        _callMethod(_delegate, 'showNotification', args), NotificationEvent._);
   }
 }
 
@@ -554,15 +545,13 @@ class PushManager {
   /// new push subscription.
   Future<PushSubscription> subscribe([PushSubscriptionOptions? options]) =>
       promiseToFuture<Object, PushSubscription>(
-          _callMethod(_delegate, 'subscribe', [options]),
-          (Object j) => PushSubscription._(j));
+          _callMethod(_delegate, 'subscribe', [options]), PushSubscription._);
 
   /// Returns a promise that resolves to a PushSubscription details of
   /// the retrieved push subscription.
   Future<PushSubscription> getSubscription() =>
       promiseToFuture<Object, PushSubscription>(
-          _callMethod(_delegate, 'getSubscription', []),
-          (Object j) => PushSubscription._(j));
+          _callMethod(_delegate, 'getSubscription', []), PushSubscription._);
 
   /// Returns a promise that resolves to the PushPermissionStatus of the
   /// requesting webapp, which will be one of granted, denied, or default.

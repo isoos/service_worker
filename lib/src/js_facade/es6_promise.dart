@@ -12,7 +12,8 @@ import 'package:js/js.dart';
 abstract class Thenable<T> {
   external Thenable<U> then<U>(
       [Thenable<U> Function(T value)? onFulfilled,
-      Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
+      Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */
+          onRejected]);
 }
 
 @JS()
@@ -40,7 +41,8 @@ class Promise<T> implements Thenable<T> {
   @override
   external Promise<U> then<U>(
       [Thenable<U> Function(T value)? onFulfilled,
-      Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */ onRejected]);
+      Function? /* Func1<dynamic, U|Thenable<U>>|VoidFunc1<dynamic> */
+          onRejected]);
 
   /// Sugar for promise.then(undefined, onRejected)
   // ignore: non_constant_identifier_names
