@@ -1,6 +1,6 @@
 ## 0.3.0
 
-- Stable release
+- Stable release ([#28](https://github.com/isoos/service_worker/pull/28) by [alextekartik](https://github.com/alextekartik)).
 
 ## 0.3.0-nullsafety.1
 
