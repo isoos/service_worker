@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Stable release
+
 ## 0.3.0-nullsafety.1
 
 - Null safety migration ([#27](https://github.com/isoos/service_worker/pull/27) by [alextekartik](https://github.com/alextekartik)).
