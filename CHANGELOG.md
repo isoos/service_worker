@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Fix `PushManager.getSubscription` to allow it to return `null`.
+
 ## 0.3.0
 
 - Stable release ([#28](https://github.com/isoos/service_worker/pull/28) by [alextekartik](https://github.com/alextekartik)).
