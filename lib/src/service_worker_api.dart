@@ -549,9 +549,10 @@ class PushManager {
 
   /// Returns a promise that resolves to a PushSubscription details of
   /// the retrieved push subscription.
-  Future<PushSubscription> getSubscription() =>
-      promiseToFuture<Object, PushSubscription>(
-          _callMethod(_delegate, 'getSubscription', []), PushSubscription._);
+  Future<PushSubscription?> getSubscription() =>
+      promiseToFuture<Object?, PushSubscription?>(
+          _callMethod(_delegate, 'getSubscription', []),
+          (Object? j) => (j == null) ? null : PushSubscription._(j));
 
   /// Returns a promise that resolves to the PushPermissionStatus of the
   /// requesting webapp, which will be one of granted, denied, or default.
