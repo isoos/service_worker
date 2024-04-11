@@ -430,7 +430,7 @@ class ServiceWorkerClient {
 
 class WindowClient extends ServiceWorkerClient {
   // Masked type: facade.WindowClient
-  WindowClient._(Object delegate) : super._(delegate);
+  WindowClient._(super.delegate) : super._();
 
   /// Gives user input focus to the current client.
   Future<void> focus() => promiseToFuture(_callMethod(_delegate, 'focus', []));
@@ -769,7 +769,7 @@ class FetchEvent implements Event {
 class InstallEvent extends ExtendableEvent {
   ServiceWorker? _activeWorker;
   // Masked type: facade.InstallEvent
-  InstallEvent._(Object delegate) : super._(delegate);
+  InstallEvent._(super.delegate) : super._();
 
   /// Returns the ServiceWorker that is currently actively controlling the page.
   ServiceWorker? get activeWorker => _activeWorker ??=
@@ -859,7 +859,7 @@ class ServiceWorker implements Worker {
 /// — extends the lifetime of such events.
 class ExtendableMessageEvent extends ExtendableEvent {
   // Masked type: facade.ExtendableMessageEvent
-  ExtendableMessageEvent._(Object delegate) : super._(delegate);
+  ExtendableMessageEvent._(super.delegate) : super._();
 
   /// Returns the event's data. It can be any data type.
   dynamic get data => _getProperty(_delegate, 'data');
@@ -885,7 +885,7 @@ class ExtendableMessageEvent extends ExtendableEvent {
 /// the ServiceWorkerGlobalScope of a ServiceWorker.
 class NotificationEvent extends ExtendableEvent {
   // Masked type: facade.NotificationEvent
-  NotificationEvent._(Object delegate) : super._(delegate);
+  NotificationEvent._(super.delegate) : super._();
 
   /// Returns a Notification object representing
   /// the notification that was clicked to fire the event.
@@ -904,7 +904,7 @@ class NotificationEvent extends ExtendableEvent {
 /// It contains the information sent from an application server to a PushSubscription.
 class PushEvent extends ExtendableEvent {
   // Masked type: facade.PushEvent
-  PushEvent._(Object delegate) : super._(delegate);
+  PushEvent._(super.delegate) : super._();
 
   /// Returns a reference to a PushMessageData object containing
   /// data sent to the PushSubscription.
@@ -961,7 +961,7 @@ class Request extends Body {
   Headers? _headers;
 
   // Masked type: facade.Request
-  Request._(Object delegate) : super._(delegate);
+  Request._(super.delegate) : super._();
 
   String? get method => _getProperty(_delegate, 'method');
   String? get url => _getProperty(_delegate, 'url');
@@ -1010,7 +1010,7 @@ class Request extends Body {
 class Response extends Body {
   Headers? _headers;
   // Masked type: facade.Response
-  Response._(Object delegate) : super._(delegate);
+  Response._(super.delegate) : super._();
 
   factory Response.redirect(String url, [int? status]) =>
       Response._(facade.Response.redirect(url, status));
